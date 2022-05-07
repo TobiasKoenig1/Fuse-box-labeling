@@ -1,0 +1,27 @@
+Grundfunktionen:
+
+tabellen hover effekt
+
+button to create more tablles unendlich gestallten und remove button einführen  //Done
+
+druck button für die passende länge
+
+tabellen überschrift automnatisch anpassen und in einer farbe färben
+
+tabellen textarea größe anpassen
+
+inventarliste erstellen
+
+
+Features:
+
+tabelle einklappen und beschriften welche es ist
+
+auto complete funktion
+
+export import der tabellen
+
+Tabellen länge anpassen für halbe tabellen //Done
+
+
+Bugfixes:
