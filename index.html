@@ -23,11 +23,10 @@
 
 <body>
     <div id="app" class="container">
-
     <template v-for="i in tables">
       <div class="display-flex">
         <div class="input-group my-input">
-          <input type="text" class="form-control my-input-font" v-model="theadevalue[0].name[0]">
+          <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" v-on:input="loadtheadvalue(i)">
         </div>
         <div class="my-table">
           <table class="table table-borderless table-number mt-3">
@@ -42,9 +41,9 @@
           <table class="table table-bordered border-dark">
             <thead class="blue">
               <tr class="blue">
-                <template v-for="item in items[i].name">
-                  <th v-bind:style="{ width: fontsize[i].name[item] + '%'}">
-                    <input type="text" class="my-input-thead blue" :value="theadevalue[0].name[0] + theadevalue2[0].name[0]">
+                <template v-for="item in items[i].name"> 
+                  <th v-bind:style="{ width: FontSize[i].name[item] + '%'}">
+                    <input type="text" class="my-input-thead blue" v-model="TheadValue[i].name[item]">
                   </th>
                 </template>
               </tr>
@@ -52,7 +51,7 @@
             <tbody>
               <tr>
                 <template v-for="item in items[i].name">
-                  <td v-bind:style="{ width: fontsize[i].name[item] + '%'}"><textarea class="my-textarea-tbody"></textarea></td>
+                  <td v-bind:style="{ width: FontSize[i].name[item] + '%'}"><textarea class="my-textarea-tbody"></textarea></td>
                 </template>
               </tr>
             </tbody>

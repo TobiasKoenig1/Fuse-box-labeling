@@ -2,9 +2,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color-adjust:exact;
     -webkit-print-color-adjust:exact;
 }
+
 .my-textarea-tbody{
     border: 0;
     width: 100%;
