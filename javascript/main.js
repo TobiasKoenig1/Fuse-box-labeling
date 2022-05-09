@@ -39,22 +39,22 @@ Vue.createApp({
 
     loadtheadvalue: function(table){
       this.TheadValue.push({name:[]});
-      let zähler = 0;
+      let zaehler = 0;
       for (i = 0; i < this.tablelength+1; i++) {
         if (this.textareas[table].name[i] === true) {
-          zähler++;
-          this.TheadValue[table].name[i] = this.InputValueThead[table] + "F" + zähler;
-        };
+          zaehler++;
+          this.TheadValue[table].name[i] = this.InputValueThead[table] + "F" + zaehler;
+        }
       }
     },
 
     loadtablelength: function () {
-      for (a = 0; a < this.tablelength+1; a++) {
+      for (let a = 0; a < this.tablelength+1; a++) {
         this.textareas[this.tables].name[a] = false;
-    };
-        for (i = 0; i < this.tablelength+1; i+=2) {
+    }
+        for (let i = 0; i < this.tablelength+1; i+=2) {
           this.textareas[this.tables].name[i] = true;
-      };
+      }
     },
 
     changetableclick: function(index, index2){
@@ -69,32 +69,27 @@ Vue.createApp({
     //can create line in table and add a textarea
     changetable: function (index, index2, hover) {
       
-      let zähler = 0;
+      let zaehler = 0;
       let multiplikator = 100 / (this.tablelength);
 
       if(hover === true){
         this.tableclicked = hover;
-      };
+      }
       if(this.tableclicked === true){
       this.items[index].name.splice(0);
       this.item.splice(0);
     
-      if (this.textareas[index].name[index2] === false) {
-        this.textareas[index].name[index2] = true;
-      } else {
-        this.textareas[index].name[index2] = false;
-      }
-      for (i = 0; i < this.tablelength+1; i++) {
+      this.textareas[index].name[index2] = this.textareas[index].name[index2] === false;
+      for (let i = 0; i < this.tablelength+1; i++) {
         if (this.textareas[index].name[i] === true) {
           this.items[index].name.push(i);
-          this.FontSize[index].name[i] = zähler * multiplikator;
-          zähler = 1;
+          this.FontSize[index].name[i] = zaehler * multiplikator;
+          zaehler = 1;
         } else {
-          zähler++;
+          zaehler++;
         }
-      }; 
-      };
-
+      }
+      }
     },
 
     addtable: function () {
@@ -116,8 +111,9 @@ Vue.createApp({
         this.items.splice(this.tables, 1)
         this.textareas.splice(this.tables, 1)
         this.tables--;
-      };
+      }
     },
+
       printInfo: function () {
         window.print();
     },
