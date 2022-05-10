@@ -40,10 +40,16 @@ Vue.createApp({
     loadtheadvalue: function(table){
       this.TheadValue.push({name:[]});
       let zaehler = 0;
-      for (i = 0; i < this.tablelength+1; i++) {
+      let firstthead = false;
+      for (let i = 0; i < this.tablelength+1; i++) {
         if (this.textareas[table].name[i] === true) {
-          zaehler++;
-          this.TheadValue[table].name[i] = this.InputValueThead[table] + "F" + zaehler;
+          if (firstthead === false){
+            firstthead = true;
+            this.TheadValue[table].name[i] = "0" + "F" + this.InputValueThead[table];
+          }else{
+            zaehler++;
+            this.TheadValue[table].name[i] = this.InputValueThead[table] + "F" + zaehler;
+          }
         }
       }
     },
