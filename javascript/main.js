@@ -1,3 +1,5 @@
+
+
 Vue.createApp({
   data() {
     return {
@@ -38,10 +40,16 @@ Vue.createApp({
     loadtheadvalue: function(table){
       this.TheadValue.push({name:[]});
       let zaehler = 0;
+      let firstthead = false;
       for (let i = 0; i < this.tablelength+1; i++) {
         if (this.textareas[table].name[i] === true) {
-          zaehler++;
-          this.TheadValue[table].name[i] = this.InputValueThead[table] + "F" + zaehler;
+          if (firstthead === false){
+            firstthead = true;
+            this.TheadValue[table].name[i] = "0" + "F" + this.InputValueThead[table];
+          }else{
+            zaehler++;
+            this.TheadValue[table].name[i] = this.InputValueThead[table] + "F" + zaehler;
+          }
         }
       }
     },
@@ -78,7 +86,7 @@ Vue.createApp({
       this.item.splice(0);
     
       this.textareas[index].name[index2] = this.textareas[index].name[index2] === false;
-      for (i = 0; i < this.tablelength+1; i++) {
+      for (let i = 0; i < this.tablelength+1; i++) {
         if (this.textareas[index].name[i] === true) {
           this.items[index].name.push(i);
           this.FontSize[index].name[i] = zaehler * multiplikator;
@@ -88,7 +96,6 @@ Vue.createApp({
         }
       }
       }
-
     },
 
     addtable: function () {
@@ -112,6 +119,7 @@ Vue.createApp({
         this.tables--;
       }
     },
+
       printInfo: function () {
         window.print();
     },
