@@ -3,6 +3,7 @@
 Vue.createApp({
   data() {
     return {
+      theadzaehler: 0,
       tableclicked: true,
       tablelength:24,
       tables: 0,
@@ -39,16 +40,20 @@ Vue.createApp({
 
     loadtheadvalue: function(table){
       this.TheadValue.push({name:[]});
-      let zaehler = 0;
-      let firstthead = false;
+      let firstthead;
+
+      if(this.InputValueThead[table] !== this.InputValueThead[table-1]){
+        this.zaehler = 0;
+        firstthead = false;
+      }
       for (let i = 0; i < this.tablelength+1; i++) {
         if (this.textareas[table].name[i] === true) {
           if (firstthead === false){
             firstthead = true;
             this.TheadValue[table].name[i] = "0" + "F" + this.InputValueThead[table];
           }else{
-            zaehler++;
-            this.TheadValue[table].name[i] = this.InputValueThead[table] + "F" + zaehler;
+            this.zaehler++;
+            this.TheadValue[table].name[i] = this.InputValueThead[table] + "F" + this.zaehler;
           }
         }
       }
