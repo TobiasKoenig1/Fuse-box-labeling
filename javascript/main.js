@@ -1,5 +1,4 @@
 
-
 Vue.createApp({
   data() {
     return {
@@ -19,6 +18,7 @@ Vue.createApp({
       item: [],
 
       InputValueThead: [],
+      LastInputValueThead:[],
 
       TheadValue: [
         {name:[]},
@@ -32,6 +32,8 @@ Vue.createApp({
 
     //pre load Funktions
     created() {
+      this.InputValueThead[1] = "2";
+      this.LastInputValueThead[1] = "0";
       this.addtable();
     },
 
@@ -39,23 +41,25 @@ Vue.createApp({
   methods: {
 
     loadtheadvalue: function(table){
-      this.TheadValue.push({name:[]});
-      let firstthead;
+      if(this.InputValueThead[table] !== this.LastInputValueThead[table]){
+        let firstthead;
+        if(this.InputValueThead[table] !== this.InputValueThead[table-1]){
+          this.theadzaehler = 0;
+          firstthead = false;
+        }
 
-      if(this.InputValueThead[table] !== this.InputValueThead[table-1]){
-        this.zaehler = 0;
-        firstthead = false;
-      }
-      for (let i = 0; i < this.tablelength+1; i++) {
-        if (this.textareas[table].name[i] === true) {
-          if (firstthead === false){
-            firstthead = true;
-            this.TheadValue[table].name[i] = "0" + "F" + this.InputValueThead[table];
-          }else{
-            this.zaehler++;
-            this.TheadValue[table].name[i] = this.InputValueThead[table] + "F" + this.zaehler;
+        for (let i = 0; i < this.tablelength+1; i++) {
+          if (this.textareas[table].name[i] === true) {
+            if (firstthead === false){
+              firstthead = true;
+              this.TheadValue[table].name[i] = "0" + "F" + this.InputValueThead[table];
+            }else{
+              this.theadzaehler++;
+              this.TheadValue[table].name[i] = this.InputValueThead[table] + "F" + this.theadzaehler;
+            }
           }
         }
+        this.LastInputValueThead[table] = this.InputValueThead[table];
       }
     },
 
@@ -109,6 +113,7 @@ Vue.createApp({
       this.FontSize.push({name:[]})
       this.items.push({name:[]})
       this.textareas.push({name:[]})
+      this.TheadValue.push({name:[]});
 
       this.loadtablelength();
       this.changetable(this.tables, 0, true);
@@ -121,6 +126,7 @@ Vue.createApp({
         this.FontSize.splice(this.tables, 1)
         this.items.splice(this.tables, 1)
         this.textareas.splice(this.tables, 1)
+        this.TheadValue.splice(this.tables, 1)
         this.tables--;
       }
     },
