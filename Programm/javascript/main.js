@@ -6,15 +6,19 @@ Vue.createApp({
       tableclicked: true,
       tablelength:24,
       tables: 0,
+
       FontSize: [
         {name:[]},
       ],
+
       textareas: [
         {name:[]},
       ],
+
       items: [
         {name: []},
       ],
+
       item: [],
 
       InputValueThead: [],
@@ -23,9 +27,7 @@ Vue.createApp({
       TheadValue: [
         {name:[]},
       ],
-      theadevalue3: [
-        {name:[]},
-      ],
+
       value:[],
     };
   },
@@ -63,11 +65,12 @@ Vue.createApp({
       }
     },
 
-    loadtablelength: function () {
+    //loads how many lines are created at the beginning
+    loadtableline: function () {
       for (let a = 0; a < this.tablelength+1; a++) {
         this.textareas[this.tables].name[a] = false;
     }
-        for (let i = 0; i < this.tablelength+1; i+=2) {
+        for (let i = 0; i < this.tablelength+1; i+=3) {
           this.textareas[this.tables].name[i] = true;
       }
     },
@@ -107,29 +110,53 @@ Vue.createApp({
       }
     },
 
+    pusharray: function(array){
+      array.push({name:[]})
+    },
+
+
+    splicearray: function(array){
+      array.splice(this.tables, 1)
+    },
+
     addtable: function () {
-      this.tables++;
+      let array = [
+        this.FontSize, 
+        this.items, 
+        this.textareas,
+        this.TheadValue
+      ];
 
-      this.FontSize.push({name:[]})
-      this.items.push({name:[]})
-      this.textareas.push({name:[]})
-      this.TheadValue.push({name:[]});
+      this.tables++;  
 
-      this.loadtablelength();
+      array.forEach ((arrays) => {
+        this.pusharray(arrays);
+      });
+
+      this.loadtableline();
       this.changetable(this.tables, 0, true);
 
       this.loadtheadvalue(this.tables);
     },
 
     removetable: function () {
+      let array = [
+        this.FontSize, 
+        this.items, 
+        this.textareas,
+        this.TheadValue
+      ];
+
       if (this.tables > 1){
-        this.FontSize.splice(this.tables, 1)
-        this.items.splice(this.tables, 1)
-        this.textareas.splice(this.tables, 1)
-        this.TheadValue.splice(this.tables, 1)
+
+        array.forEach ((arrays) => {
+          this.pusharray(arrays);
+        });
+
         this.tables--;
       }
     },
+
 
       printInfo: function () {
         window.print();
