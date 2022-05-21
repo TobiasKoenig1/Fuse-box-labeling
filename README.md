@@ -1,5 +1,5 @@
 # Fuse box labeling
-With this program you can create and print labels for German fuse boxes to label the fuses
+Tthis application can create and print labels for German fuse boxes to label the fuses
 
 
 ## Table of Contents
@@ -59,24 +59,24 @@ Project is: _in progress_
 
 
 ## Room for Improvement
-Include areas you believe need improvement / could be improved. Also add TODOs for future development.
-
 Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
+- autocomplete funktion
+- export and import of tables
+- collapse and expand tables
 
 To do:
 - Feature to be added 1
 - Feature to be added 2
+
+Bug fixes:
 
 
 ## Acknowledgements
 - This project was inspired by my cousin
 
 
-
 ## Contact
-Created by [@TheKing6488]
+Created by [@TheKing6488] (discordapp.com/users/270594690313748480) - feel free to contact me!
 
 
 <!-- Optional -->
