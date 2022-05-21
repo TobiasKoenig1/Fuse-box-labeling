@@ -76,7 +76,7 @@ Bug fixes:
 
 
 ## Contact
-Created by [@TheKing6488] (discordapp.com/users/270594690313748480) - feel free to contact me!
+Created by [@TheKing6488](https://www.discordapp.com/users/270594690313748480) - feel free to contact me!
 
 
 <!-- Optional -->
