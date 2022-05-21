@@ -2,155 +2,182 @@
 Vue.createApp({
   data() {
     return {
-      theadzaehler: 0,
+      //thead
+      theadzaehler: [],
+      firstthead: [],
+      
+      
+      //table
       tableclicked: true,
-      tablelength:24,
+      tablelength: 24,
       tables: 0,
 
       FontSize: [
-        {name:[]},
+        { name: [] },
       ],
 
       textareas: [
-        {name:[]},
+        { name: [] },
       ],
 
       items: [
-        {name: []},
+        { name: [] },
       ],
 
       item: [],
 
       InputValueThead: [],
-      LastInputValueThead:[],
+      LastInputValueThead: [],
 
       TheadValue: [
-        {name:[]},
+        { name: [] },
       ],
 
-      value:[],
+      value: [],
     };
   },
 
-    //pre load Funktions
-    created() {
-      this.InputValueThead[1] = "2";
-      this.LastInputValueThead[1] = "0";
-      this.addtable();
-    },
-
+  //pre load Funktions
+  created() {
+    this.InputValueThead[1] = 2;
+    this.LastInputValueThead[1] = 0;
+    this.addtable();
+  },
 
   methods: {
 
-    loadtheadvalue: function(table){
-      if(this.InputValueThead[table] !== this.LastInputValueThead[table]){
-        let firstthead;
-        if(this.InputValueThead[table] !== this.InputValueThead[table-1]){
-          this.theadzaehler = 0;
-          firstthead = false;
-        }
+    //Loads the table header with values ​​by default
+    loadtheadvalue: function () {
 
-        for (let i = 0; i < this.tablelength+1; i++) {
-          if (this.textareas[table].name[i] === true) {
-            if (firstthead === false){
-              firstthead = true;
-              this.TheadValue[table].name[i] = "0" + "F" + this.InputValueThead[table];
-            }else{
-              this.theadzaehler++;
-              this.TheadValue[table].name[i] = this.InputValueThead[table] + "F" + this.theadzaehler;
+      for (let i = 1; i < this.tables + 1; i++) {
+        let maxvalue = 0;
+        if (maxvalue < this.InputValueThead[i]) {
+          maxvalue = this.InputValueThead[i];
+        }
+        for (let a = 0; a < maxvalue + 1; a++) {
+          this.firstthead[a] = false;
+          this.theadzaehler[a] = 0;
+        }
+      }
+
+      for (let i = 1; i < this.tables + 1; i++) {
+        for (let a = 0; a < this.tablelength + 1; a++) {
+
+          this.TheadValue[i].name[a] = "";
+          if (this.firstthead[this.InputValueThead[i]] === false) {
+
+            if (this.textareas[i].name[a] === true) {
+              this.TheadValue[i].name[a] = "0" + "F" + this.theadzaehler[this.InputValueThead[i]];
+              this.firstthead[this.InputValueThead[i]] = true;
             }
           }
+
+          if (this.textareas[i].name[a] === true) {
+            if (this.TheadValue[i].name[a] !== "0F" + this.theadzaehler[this.InputValueThead[i]]) {
+              this.theadzaehler[this.InputValueThead[i]]++;
+              this.TheadValue[i].name[a] = this.InputValueThead[i] + "F" + this.theadzaehler[this.InputValueThead[i]];
+            }
+
+          }
         }
-        this.LastInputValueThead[table] = this.InputValueThead[table];
       }
     },
 
     //loads how many lines are created at the beginning
     loadtableline: function () {
-      for (let a = 0; a < this.tablelength+1; a++) {
+      let tablewide = 2;
+
+      for (let a = 0; a < this.tablelength + 1; a++) {
         this.textareas[this.tables].name[a] = false;
-    }
-        for (let i = 0; i < this.tablelength+1; i+=3) {
-          this.textareas[this.tables].name[i] = true;
+      }
+      for (let i = 0; i < this.tablelength + 1; i += tablewide) {
+        this.textareas[this.tables].name[i] = true;
       }
     },
 
-    changetableclick: function(index, index2){
-      if(this.tableclicked === false){
-        this.changetable(index, index2, true)
+
+    //check table click for hover effect
+    changetableclick: function (table, length) {
+      if (this.tableclicked === false) {
+        this.previewtable(table, length, true)
         this.tableclicked = false;
-      }else{
+      } else {
         this.tableclicked = false;
       }
+      this.loadtheadvalue(table);
     },
+
+    //preview lines that are changed
+    previewtable: function (table, length, hover) {
+      if (hover === true) {
+        this.tableclicked = true;
+      }
+      if (this.tableclicked === true) {
+        this.changetable(table, length)
+      }
+    },
+
 
     //can create line in table and add a textarea
-    changetable: function (index, index2, hover) {
-      
+    changetable: function (table, length) {
+
       let zaehler = 0;
       let multiplikator = 100 / (this.tablelength);
 
-      if(hover === true){
-        this.tableclicked = hover;
-      }
-      if(this.tableclicked === true){
-      this.items[index].name.splice(0);
+      this.items[table].name.splice(0);
       this.item.splice(0);
-    
-      this.textareas[index].name[index2] = this.textareas[index].name[index2] === false;
-      for (let i = 0; i < this.tablelength+1; i++) {
-        if (this.textareas[index].name[i] === true) {
-          this.items[index].name.push(i);
-          this.FontSize[index].name[i] = zaehler * multiplikator;
+
+      this.textareas[table].name[length] = this.textareas[table].name[length] === false;
+      for (let i = 0; i < this.tablelength + 1; i++) {
+        if (this.textareas[table].name[i] === true) {
+          this.items[table].name.push(i);
+          this.FontSize[table].name[i] = zaehler * multiplikator;
           zaehler = 1;
         } else {
           zaehler++;
         }
       }
-      }
-    },
-
-    pusharray: function(array){
-      array.push({name:[]})
     },
 
 
-    splicearray: function(array){
-      array.splice(this.tables, 1)
-    },
-
+    //create a new table
     addtable: function () {
       let array = [
-        this.FontSize, 
-        this.items, 
+        this.FontSize,
+        this.items,
         this.textareas,
         this.TheadValue
       ];
 
-      this.tables++;  
 
-      array.forEach ((arrays) => {
-        this.pusharray(arrays);
+      this.tables++;
+
+      array.forEach((arrays) => {
+        arrays.push({ name: [] });
       });
 
       this.loadtableline();
       this.changetable(this.tables, 0, true);
+      if (this.tables > 1) {
+        this.InputValueThead[this.tables] = this.InputValueThead[this.tables - 1];
+      }
 
       this.loadtheadvalue(this.tables);
     },
 
+    //deletes the last table
     removetable: function () {
       let array = [
-        this.FontSize, 
-        this.items, 
+        this.FontSize,
+        this.items,
         this.textareas,
         this.TheadValue
       ];
 
-      if (this.tables > 1){
+      if (this.tables > 1) {
 
-        array.forEach ((arrays) => {
-          this.pusharray(arrays);
+        array.forEach((arrays) => {
+          arrays.splice(this.tables, 1);
         });
 
         this.tables--;
@@ -158,13 +185,13 @@ Vue.createApp({
     },
 
 
-      printInfo: function () {
-        window.print();
+    printInfo: function () {
+      window.print();
     },
   },
 
 
-  mytestfunction: function(){
+  mytestfunction: function () {
 
   },
 

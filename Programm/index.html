@@ -33,7 +33,7 @@
             <thead>
               <tr class="number-line">
                 <template v-for="length in tablelength-1">
-                  <th class="test" @click="changetableclick(i, length)" @mouseover="changetable(i, length, true)" @mouseleave="changetable(i, length, false)">*</th>
+                  <th class="test" @click="changetableclick(i, length)" @mouseover="previewtable(i, length, true)" @mouseleave="previewtable(i, length, false)">*</th>
                 </template>
               </tr>
             </thead>
