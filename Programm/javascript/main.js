@@ -5,8 +5,15 @@ Vue.createApp({
       //thead
       theadzaehler: [],
       firstthead: [],
-      
-      
+
+      TheadValue: [
+        { name: [] },
+      ],
+
+      ChangedTheadValue: [
+        { name: [] },
+      ],
+
       //table
       tableclicked: true,
       tablelength: 24,
@@ -29,10 +36,6 @@ Vue.createApp({
       InputValueThead: [],
       LastInputValueThead: [],
 
-      TheadValue: [
-        { name: [] },
-      ],
-
       value: [],
     };
   },
@@ -45,6 +48,16 @@ Vue.createApp({
   },
 
   methods: {
+
+    loadmyinputtheadvalue: function (table, col) {
+
+      if (this.TheadValue[table].name[col] === "") {
+        this.ChangedTheadValue[table].name[col] = false;
+      } else {
+        this.ChangedTheadValue[table].name[col] = true;
+      }
+      this.loadtheadvalue();
+    },
 
     //Loads the table header with values ​​by default
     loadtheadvalue: function () {
@@ -62,22 +75,23 @@ Vue.createApp({
 
       for (let i = 1; i < this.tables + 1; i++) {
         for (let a = 0; a < this.tablelength + 1; a++) {
-
-          this.TheadValue[i].name[a] = "";
           if (this.firstthead[this.InputValueThead[i]] === false) {
-
+            this.TheadValue[i].name[a] = "";
+            
             if (this.textareas[i].name[a] === true) {
-              this.TheadValue[i].name[a] = "0" + "F" + this.theadzaehler[this.InputValueThead[i]];
+              this.TheadValue[i].name[a] = "0" + "F" + this.InputValueThead[i];
               this.firstthead[this.InputValueThead[i]] = true;
             }
           }
 
-          if (this.textareas[i].name[a] === true) {
-            if (this.TheadValue[i].name[a] !== "0F" + this.theadzaehler[this.InputValueThead[i]]) {
-              this.theadzaehler[this.InputValueThead[i]]++;
-              this.TheadValue[i].name[a] = this.InputValueThead[i] + "F" + this.theadzaehler[this.InputValueThead[i]];
-            }
+          if (this.ChangedTheadValue[i].name[a] !== true) {
 
+            if (this.textareas[i].name[a] === true) {
+              if (this.TheadValue[i].name[a] !== "0F" + this.InputValueThead[i]) {
+                this.theadzaehler[this.InputValueThead[i]]++;
+                this.TheadValue[i].name[a] = this.InputValueThead[i] + "F" + this.theadzaehler[this.InputValueThead[i]];
+              }
+            }
           }
         }
       }
@@ -146,7 +160,8 @@ Vue.createApp({
         this.FontSize,
         this.items,
         this.textareas,
-        this.TheadValue
+        this.TheadValue,
+        this.ChangedTheadValue
       ];
 
 
@@ -171,7 +186,8 @@ Vue.createApp({
         this.FontSize,
         this.items,
         this.textareas,
-        this.TheadValue
+        this.TheadValue,
+        THIS.ChangedTheadValue
       ];
 
       if (this.tables > 1) {

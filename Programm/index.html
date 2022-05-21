@@ -18,7 +18,7 @@
     <script src="https://unpkg.com/vue@3"></script>
     <script src="javascript/main.js" defer></script>
 
-    <title>Sicherungskasten</title>
+    <title>Fuse box labeling</title>
 </head>
 
 <body>
@@ -26,7 +26,7 @@
     <template v-for="i in tables">
       <div class="display-flex">
         <div class="input-group my-input">
-          <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" v-on:input="loadtheadvalue(i)">
+          <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" v-on:input="loadtheadvalue()">
         </div>
         <div class="my-table">
           <table class="table table-borderless table-number mt-3">
@@ -43,7 +43,7 @@
               <tr class="blue">
                 <template v-for="item in items[i].name"> 
                   <th v-bind:style="{ width: FontSize[i].name[item] + '%'}">
-                    <input type="text" class="my-input-thead blue" v-model="TheadValue[i].name[item]">
+                    <input type="text" class="my-input-thead blue" v-model="TheadValue[i].name[item]" @focusout="loadmyinputtheadvalue(i, item)">
                   </th>
                 </template>
               </tr>

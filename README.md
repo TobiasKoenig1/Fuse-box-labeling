@@ -69,6 +69,8 @@ To do:
 - Feature to be added 2
 
 Bug fixes:
+- fix 1
+- fix 2
 
 
 ## Acknowledgements
@@ -77,7 +79,6 @@ Bug fixes:
 
 ## Contact
 Created by [@TheKing6488](https://www.discordapp.com/users/270594690313748480) - feel free to contact me!
-
 
 <!-- Optional -->
 <!-- ## License -->
