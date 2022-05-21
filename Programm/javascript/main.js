@@ -48,14 +48,13 @@ Vue.createApp({
   },
 
   methods: {
+    deletemyinputtheadvalue: function(table, col){
+      this.ChangedTheadValue[table].name[col] = false;
+      this.loadtheadvalue();
+    },
 
     loadmyinputtheadvalue: function (table, col) {
-
-      if (this.TheadValue[table].name[col] === "") {
-        this.ChangedTheadValue[table].name[col] = false;
-      } else {
-        this.ChangedTheadValue[table].name[col] = true;
-      }
+      this.ChangedTheadValue[table].name[col] = true;
       this.loadtheadvalue();
     },
 

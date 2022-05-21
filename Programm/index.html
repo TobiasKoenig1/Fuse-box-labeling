@@ -26,7 +26,7 @@
     <template v-for="i in tables">
       <div class="display-flex">
         <div class="input-group my-input">
-          <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" v-on:input="loadtheadvalue()">
+          <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" @input="loadtheadvalue()">
         </div>
         <div class="my-table">
           <table class="table table-borderless table-number mt-3">
@@ -39,11 +39,11 @@
             </thead>
           </table>
           <table class="table table-bordered border-dark">
-            <thead class="blue">
+            <thead>
               <tr class="blue">
                 <template v-for="item in items[i].name"> 
                   <th v-bind:style="{ width: FontSize[i].name[item] + '%'}">
-                    <input type="text" class="my-input-thead blue" v-model="TheadValue[i].name[item]" @focusout="loadmyinputtheadvalue(i, item)">
+                    <input type="text" class="my-input-thead blue" v-model="TheadValue[i].name[item]" @input="loadmyinputtheadvalue(i, item)" @dblclick="deletemyinputtheadvalue(i, item)">
                   </th>
                 </template>
               </tr>
