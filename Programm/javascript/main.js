@@ -187,7 +187,7 @@ Vue.createApp({
         this.items,
         this.textareas,
         this.TheadValue,
-        THIS.ChangedTheadValue
+        this.ChangedTheadValue
       ];
 
       if (this.tables > 1) {
