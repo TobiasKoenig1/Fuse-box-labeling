@@ -38,7 +38,7 @@ List the ready features here:
 
 ## Screenshots
 ![Example screenshot](./img/programm.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
+
 
 
 ## Setup
@@ -66,12 +66,10 @@ Room for improvement:
 - Dark mode
 
 To do:
-- Feature to be added 1
-- Feature to be added 2
+- Table with an overview of fuses with number, circuit, rating, fuse and supply line
 
 Bug fixes:
-- fix 1
-- fix 2
+
 
 
 ## Acknowledgements
