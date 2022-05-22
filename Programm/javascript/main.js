@@ -2,6 +2,9 @@
 Vue.createApp({
   data() {
     return {
+      //print
+      visibility: false,
+
       //thead
       theadzaehler: [],
       firstthead: [],
@@ -201,14 +204,12 @@ Vue.createApp({
 
 
     printInfo: function () {
-      window.print();
+      this.visibility = true;
+      setTimeout(() => window.print(), 1);
+      setTimeout(() => this.visibility = false, 1);
     },
   },
 
-
-  mytestfunction: function () {
-
-  },
 
 }).mount('#app')
 
