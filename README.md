@@ -37,7 +37,7 @@ List the ready features here:
 
 
 ## Screenshots
-![Example screenshot](./img/scree- Tech 3 - version 3.0nshot.png)
+![Example screenshot](./img/programm.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
@@ -63,6 +63,7 @@ Room for improvement:
 - autocomplete funktion
 - export and import of tables
 - collapse and expand tables
+- Dark mode
 
 To do:
 - Feature to be added 1
