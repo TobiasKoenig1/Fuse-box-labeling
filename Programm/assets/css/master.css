@@ -52,8 +52,8 @@
     min-width: 21.5cm;
 }
 
-.my-input-table th{
-    padding: none !important;
+.my-table-tr{
+    padding: 3px;
 }
 
 .my-input{
@@ -74,15 +74,11 @@
     display: flex;
 }
 
-.blue{
-    background-color: lightblue;
-}
-
 .displaynone{
     display: none;
 }
 
-.test:hover{
+.line-point:hover{
     background-color: lightblue;
     border-radius: 7px;
 }

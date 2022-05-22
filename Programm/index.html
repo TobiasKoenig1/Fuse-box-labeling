@@ -2,45 +2,48 @@
 <html lang="de">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--      Css      -->
-    <link href="assets/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/master.css" rel="stylesheet">
+  <!--      Css      -->
+  <link href="assets/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/master.css" rel="stylesheet">
 
-    <!--    JavaScript    -->
-    <script src="javascript/Bootstrap/js/bootstrap.min.js" defer></script>
-    <script src="javascript/Vue/vue.prod.js" defer></script>
-    <script src="javascript/main.js" defer></script>
+  <!--    JavaScript    -->
+  <script src="javascript/Bootstrap/js/bootstrap.min.js" defer></script>
+  <!--Use <script src="javascript/Vue/vue.prod.js" defer></script> for the production environment -->
+  <script src="javascript/Vue/vue.js" defer></script>
+  <script src="javascript/main.js" defer></script>
 
-    <title>Fuse box labeling</title>
+  <title>Fuse box labeling</title>
 </head>
 
 <body>
-    <div id="app" class="container">
+  <div id="app" class="container">
     <template v-for="i in tables">
       <div class="display-flex">
         <div class="input-group my-input" :class="{ displaynone: visibility }">
-          <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" @input="loadtheadvalue()">
+          <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" @input="loadthead()">
         </div>
         <div class="my-table">
           <table class="table table-borderless table-number mt-3" :class="{ displaynone: visibility }">
             <thead>
               <tr class="number-line">
                 <template v-for="length in tablelength-1">
-                  <th class="test" @click="changetableclick(i, length)" @mouseover="previewtable(i, length, true)" @mouseleave="previewtable(i, length, false)">*</th>
+                  <th class="line-point" @click="changetableclick(i, length)" @mouseover="previewtable(i, length, true)"
+                    @mouseleave="previewtable(i, length, false)">*</th>
                 </template>
               </tr>
             </thead>
           </table>
-          <table class="my-input-table table table-bordered border-dark">
+          <table class="my-input-table table-bordered border-dark">
             <thead>
-              <tr class="blue" >
-                <template v-for="item in items[i].name"> 
-                  <th v-bind:style="{ width: FontSize[i].name[item] + '%'}">
-                    <input type="text" class="my-input-thead blue" v-model="TheadValue[i].name[item]" @input="loadmyinputtheadvalue(i, item)" @dblclick="deletemyinputtheadvalue(i, item)">
+              <tr :style="{ background: BackGroundColor[i]}">
+                <template v-for="item in items[i].name">
+                  <th :style="{ width: FontSize[i].name[item] + '%'}" class="my-table-tr">
+                    <input type="text" class="my-input-thead" v-model="TheadValue[i].name[item]" :style="{ background: BackGroundColor[i]}"
+                      @input="loadmyinputtheadvalue(i, item)" @dblclick="deletemyinputtheadvalue(i, item)">
                   </th>
                 </template>
               </tr>
@@ -48,7 +51,9 @@
             <tbody>
               <tr>
                 <template v-for="item in items[i].name">
-                  <td v-bind:style="{ width: FontSize[i].name[item] + '%'}"><textarea class="my-textarea-tbody"></textarea></td>
+                  <td :style="{ width: FontSize[i].name[item] + '%'}" class="my-table-tr">
+                    <textarea class="my-textarea-tbody"></textarea>
+                  </td>
                 </template>
               </tr>
             </tbody>
@@ -57,9 +62,9 @@
       </div>
     </template>
     <div :class="{ displaynone: visibility }">
-      <button type="button" class="btn btn-danger m-5"  @click="removetable(1)">remove Tabelle</button>
-      <button type="button" class="btn btn-success  m-5"  @click="addtable(i)">add Tabelle</button>
-      <button type="button" class="btn btn-dark  m-5"  @click="printInfo()">Print</button>
+      <button type="button" class="btn btn-danger m-5" @click="removetable(1)">remove Tabelle</button>
+      <button type="button" class="btn btn-success  m-5" @click="addtable(i)">add Tabelle</button>
+      <button type="button" class="btn btn-dark  m-5" @click="printInfo()">Print</button>
     </div>
   </div>
 </body>

@@ -6,6 +6,8 @@ Vue.createApp({
       visibility: false,
 
       //thead
+      BackGroundColor: [],
+      InputValueThead: [],
       theadzaehler: [],
       firstthead: [],
 
@@ -35,50 +37,77 @@ Vue.createApp({
       ],
 
       item: [],
-
-      InputValueThead: [],
-      LastInputValueThead: [],
-
-      value: [],
     };
   },
 
   //pre load Funktions
   created() {
-    this.InputValueThead[1] = 2;
-    this.LastInputValueThead[1] = 0;
+    this.InputValueThead[1] = 1;
     this.addtable();
   },
 
   methods: {
+
+    //load thead background
+    backgroundcolor: function(){
+      let colors = [
+        "#800080",
+        "#FF00FF",
+        "#000080",
+        "#0000FF",
+        "#008080",
+        "#00FFFF",
+        "#008000",
+        "#00FF00",
+        "#808000",
+        "#FFFF00",
+        "#800000",
+        "#FF0000"
+      ];
+
+      for (let i = 1; i < this.tables + 1; i++) {
+        this.BackGroundColor[i] = colors[this.InputValueThead[i]-1];
+      }
+    },
+
+    //Set thead Value to default
     deletemyinputtheadvalue: function(table, col){
       this.ChangedTheadValue[table].name[col] = false;
       this.loadtheadvalue();
     },
 
+    //Change thead value
     loadmyinputtheadvalue: function (table, col) {
       this.ChangedTheadValue[table].name[col] = true;
       this.loadtheadvalue();
     },
 
-    //Loads the table header with values ​​by default
-    loadtheadvalue: function () {
+    //load theader with value and color
+    loadthead: function(){
+      this.backgroundcolor();
+      this.loadtheadvalue();
+    },
 
-      for (let i = 1; i < this.tables + 1; i++) {
-        let maxvalue = 0;
-        if (maxvalue < this.InputValueThead[i]) {
+    //Load theader with values ​​by default
+    loadtheadvalue: function () {
+      let maxvalue = 0;
+      for (let i = 1; i <= this.tables; i++) {
+        console.log(this.tables)
+        if (maxvalue < this.InputValueThead[i] && this.InputValueThead[i] < 1000) {
           maxvalue = this.InputValueThead[i];
         }
-        for (let a = 0; a < maxvalue + 1; a++) {
-          this.firstthead[a] = false;
-          this.theadzaehler[a] = 0;
-        }
+      }
+      for (let a = 0; a <= maxvalue; a++) {
+        this.firstthead[a] = false;
+        this.theadzaehler[a] = 0;
       }
 
-      for (let i = 1; i < this.tables + 1; i++) {
-        for (let a = 0; a < this.tablelength + 1; a++) {
+      for (let i = 1; i <= this.tables; i++) {
+        for (let a = 0; a <= this.tablelength; a++) {
+          if (this.ChangedTheadValue[i].name[a] !== true) {
+          this.TheadValue[i].name[a] = "";
+          }
           if (this.firstthead[this.InputValueThead[i]] === false) {
-            this.TheadValue[i].name[a] = "";
             
             if (this.textareas[i].name[a] === true) {
               this.TheadValue[i].name[a] = "0" + "F" + this.InputValueThead[i];
@@ -99,14 +128,14 @@ Vue.createApp({
       }
     },
 
-    //loads how many lines are created at the beginning
+    //load how many lines are created at the beginning
     loadtableline: function () {
       let tablewide = 2;
 
-      for (let a = 0; a < this.tablelength + 1; a++) {
+      for (let a = 0; a <= this.tablelength; a++) {
         this.textareas[this.tables].name[a] = false;
       }
-      for (let i = 0; i < this.tablelength + 1; i += tablewide) {
+      for (let i = 0; i <= this.tablelength; i += tablewide) {
         this.textareas[this.tables].name[i] = true;
       }
     },
@@ -120,7 +149,6 @@ Vue.createApp({
       } else {
         this.tableclicked = false;
       }
-      this.loadtheadvalue(table);
     },
 
     //preview lines that are changed
@@ -131,6 +159,7 @@ Vue.createApp({
       if (this.tableclicked === true) {
         this.changetable(table, length)
       }
+      this.loadtheadvalue();
     },
 
 
@@ -144,7 +173,7 @@ Vue.createApp({
       this.item.splice(0);
 
       this.textareas[table].name[length] = this.textareas[table].name[length] === false;
-      for (let i = 0; i < this.tablelength + 1; i++) {
+      for (let i = 0; i <= this.tablelength; i++) {
         if (this.textareas[table].name[i] === true) {
           this.items[table].name.push(i);
           this.FontSize[table].name[i] = zaehler * multiplikator;
@@ -178,11 +207,11 @@ Vue.createApp({
       if (this.tables > 1) {
         this.InputValueThead[this.tables] = this.InputValueThead[this.tables - 1];
       }
-
-      this.loadtheadvalue(this.tables);
+      this.backgroundcolor();
+      this.loadtheadvalue();
     },
 
-    //deletes the last table
+    //delete the last table
     removetable: function () {
       let array = [
         this.FontSize,
@@ -202,7 +231,7 @@ Vue.createApp({
       }
     },
 
-
+    //print tables
     printInfo: function () {
       this.visibility = true;
       setTimeout(() => window.print(), 1);
