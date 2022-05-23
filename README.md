@@ -26,7 +26,7 @@ Tthis application can create and print labels for German fuse boxes to label the
 
 ## Technologies Used
 - Vue.js 3
-- bootstrap 5.1.3
+- Bootstrap 5.1.3
 
 
 ## Features
