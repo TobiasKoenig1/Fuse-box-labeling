@@ -1,5 +1,4 @@
-
-Vue.createApp({
+let vOne = Vue.createApp({
   data() {
     return {
       //print
@@ -37,6 +36,7 @@ Vue.createApp({
       ],
 
       item: [],
+
     };
   },
 
@@ -46,7 +46,10 @@ Vue.createApp({
     this.addtable();
   },
 
+
   methods: {
+
+    //1: Input table
 
     //load thead background
     backgroundcolor: function(){
@@ -64,7 +67,6 @@ Vue.createApp({
         "#800000",
         "#FF0000"
       ];
-
       for (let i = 1; i < this.tables + 1; i++) {
         this.BackGroundColor[i] = colors[this.InputValueThead[i]-1];
       }
@@ -91,19 +93,18 @@ Vue.createApp({
     //Load theader with values ​​by default
     loadtheadvalue: function () {
       let maxvalue = 0;
-      for (let i = 1; i <= this.tables; i++) {
-        console.log(this.tables)
+      for (let i = 1; i < this.tables +1; i++) {
         if (maxvalue < this.InputValueThead[i] && this.InputValueThead[i] < 1000) {
           maxvalue = this.InputValueThead[i];
         }
       }
-      for (let a = 0; a <= maxvalue; a++) {
+      for (let a = 0; a < maxvalue+1; a++) {
         this.firstthead[a] = false;
         this.theadzaehler[a] = 0;
       }
 
-      for (let i = 1; i <= this.tables; i++) {
-        for (let a = 0; a <= this.tablelength; a++) {
+      for (let i = 1; i < this.tables +1; i++) {
+        for (let a = 0; a < this.tablelength +1; a++) {
           if (this.ChangedTheadValue[i].name[a] !== true) {
           this.TheadValue[i].name[a] = "";
           }
@@ -132,10 +133,10 @@ Vue.createApp({
     loadtableline: function () {
       let tablewide = 2;
 
-      for (let a = 0; a <= this.tablelength; a++) {
+      for (let a = 0; a < this.tablelength +1; a++) {
         this.textareas[this.tables].name[a] = false;
       }
-      for (let i = 0; i <= this.tablelength; i += tablewide) {
+      for (let i = 0; i < this.tablelength +1; i += tablewide) {
         this.textareas[this.tables].name[i] = true;
       }
     },
@@ -173,7 +174,7 @@ Vue.createApp({
       this.item.splice(0);
 
       this.textareas[table].name[length] = this.textareas[table].name[length] === false;
-      for (let i = 0; i <= this.tablelength; i++) {
+      for (let i = 0; i < this.tablelength +1; i++) {
         if (this.textareas[table].name[i] === true) {
           this.items[table].name.push(i);
           this.FontSize[table].name[i] = zaehler * multiplikator;
@@ -239,6 +240,6 @@ Vue.createApp({
     },
   },
 
+}).mount('#vOne')
 
-}).mount('#app')
 

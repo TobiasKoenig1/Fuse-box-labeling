@@ -11,16 +11,18 @@
   <link href="assets/css/master.css" rel="stylesheet">
 
   <!--    JavaScript    -->
-  <script src="javascript/Bootstrap/js/bootstrap.min.js" defer></script>
-  <!--Use <script src="javascript/Vue/vue.prod.js" defer></script> for the production environment -->
-  <script src="javascript/Vue/vue.js" defer></script>
-  <script src="javascript/main.js" defer></script>
+  <script src="src/Bootstrap/js/bootstrap.min.js" defer></script>
+  <!--Use <script src="src/Vue/vue.prod.js" defer></script> for the production environment -->
+  <script src="src/Vue/vue.js" defer></script>
+  <script src="src/javascript/tablecreate.js" defer></script>
+  <script src="src/javascript/tableview.js" defer></script>
+
 
   <title>Fuse box labeling</title>
 </head>
 
 <body>
-  <div id="app" class="container">
+  <div id="vOne" class="container">
     <template v-for="i in tables">
       <div class="display-flex">
         <div class="input-group my-input" :class="{ displaynone: visibility }">
@@ -37,7 +39,7 @@
               </tr>
             </thead>
           </table>
-          <table class="my-input-table table-bordered border-dark">
+          <table class="table-bordered border-dark">
             <thead>
               <tr :style="{ background: BackGroundColor[i]}">
                 <template v-for="item in items[i].name">
@@ -62,8 +64,8 @@
       </div>
     </template>
     <div :class="{ displaynone: visibility }">
-      <button type="button" class="btn btn-danger m-5" @click="removetable(1)">remove Tabelle</button>
-      <button type="button" class="btn btn-success  m-5" @click="addtable(i)">add Tabelle</button>
+      <button type="button" class="btn btn-danger m-5" @click="removetable()">remove Tabelle</button>
+      <button type="button" class="btn btn-success  m-5" @click="addtable()">add Tabelle</button>
       <button type="button" class="btn btn-dark  m-5" @click="printInfo()">Print</button>
     </div>
   </div>
