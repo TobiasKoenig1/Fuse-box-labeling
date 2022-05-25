@@ -13,15 +13,11 @@ Tthis application can create and print labels for German fuse boxes to label the
 * [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
-<!-- * [License](#license) -->
+*[License](#license)
 
 
 ## General Information
-- Provide general information about your project here.
-- What problem does it (intend to) solve?
-- What is the purpose of your project?
-- Why did you undertake it?
-<!-- You don't have to answer all the questions - just the ones relevant to your project. -->
+- Improvement for labeling of fuse boxes
 
 
 ## Technologies Used
@@ -31,9 +27,11 @@ Tthis application can create and print labels for German fuse boxes to label the
 
 ## Features
 List the ready features here:
-- Awesome feature 1
-- Awesome feature 2
-- Awesome feature 3
+V1:
+- Creating and deleting tables
+- All table heads are colored in the same color when they belong together
+- Automatic tables header fill with entered value
+- Print function with the suitable length for german fuse box
 
 
 ## Screenshots
@@ -42,16 +40,18 @@ List the ready features here:
 
 
 ## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
+requirements:
+- You must use a chromium browser
+- You need a printer to print the fuse labels
 
-Proceed to describe how to install / setup one's local environment / get started with the project.
+install:
+- You only need the Fuse box labeling folder
+- You need to change <script src="src/Vue/vue.js" defer></script> to <script src="src/Vue/vue.prod.js" defer></script> in the Index.html file
+- Now you can open the index.html in a chromium browser and use the program
 
 
 ## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
-
-`write-your-code-here`
+You can use it if you want to install a fuse box and clearly name the fuses
 
 
 ## Project Status
@@ -67,6 +67,7 @@ Room for improvement:
 
 To do:
 - Table with an overview of fuses with number, circuit, rating, fuse and supply line
+- customize thead colors better
 
 Bug fixes:
 
@@ -79,8 +80,7 @@ Bug fixes:
 ## Contact
 Created by [@TheKing6488](https://www.discordapp.com/users/270594690313748480) - feel free to contact me!
 
-<!-- Optional -->
-<!-- ## License -->
-<!-- This project is open source and available under the [... License](). -->
 
-<!-- You don't have to include all sections - just the one's relevant to your project -->
+## License
+This project is open source and available under the [MIT License](./LICENSE)
+
