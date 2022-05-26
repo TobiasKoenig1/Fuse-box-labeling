@@ -2,40 +2,42 @@ let vOne = Vue.createApp({
   data() {
     return {
       //print
-      visibility: false,
+      Visibility: false,
 
       //thead
       BackGroundColor: [],
       InputValueThead: [],
-      theadzaehler: [],
-      firstthead: [],
+      TheadZaehler: [],
+      FirstThead: [],
 
       TheadValue: [
-        { name: [] },
+        { Index: [] },
       ],
 
       ChangedTheadValue: [
-        { name: [] },
+        { Index: [] },
       ],
 
       //table
-      tableclicked: true,
-      tablelength: 24,
-      tables: 0,
-
+      TableClicked: true,
+      TablesLength: 24,
+      Tables: 0,
+      TbodyValue:[
+        { Index: [] },
+      ],
       FontSize: [
-        { name: [] },
+        { Index: [] },
       ],
 
-      textareas: [
-        { name: [] },
+      TextAreas: [
+        { Index: [] },
       ],
 
-      items: [
-        { name: [] },
+      Items: [
+        { Index: [] },
       ],
 
-      item: [],
+      Item: [],
 
     };
   },
@@ -48,9 +50,6 @@ let vOne = Vue.createApp({
 
 
   methods: {
-
-    //1: Input table
-
     //load thead background
     backgroundcolor: function(){
       let colors = [
@@ -67,20 +66,20 @@ let vOne = Vue.createApp({
         "#800000",
         "#FF0000"
       ];
-      for (let i = 1; i < this.tables + 1; i++) {
+      for (let i = 1; i < this.Tables + 1; i++) {
         this.BackGroundColor[i] = colors[this.InputValueThead[i]-1];
       }
     },
 
     //Set thead Value to default
     deletemyinputtheadvalue: function(table, col){
-      this.ChangedTheadValue[table].name[col] = false;
+      this.ChangedTheadValue[table].Index[col] = false;
       this.loadtheadvalue();
     },
 
     //Change thead value
     loadmyinputtheadvalue: function (table, col) {
-      this.ChangedTheadValue[table].name[col] = true;
+      this.ChangedTheadValue[table].Index[col] = true;
       this.loadtheadvalue();
     },
 
@@ -93,35 +92,34 @@ let vOne = Vue.createApp({
     //Load theader with values ​​by default
     loadtheadvalue: function () {
       let maxvalue = 0;
-      for (let i = 1; i < this.tables +1; i++) {
+      for (let i = 1; i < this.Tables +1; i++) {
         if (maxvalue < this.InputValueThead[i] && this.InputValueThead[i] < 1000) {
           maxvalue = this.InputValueThead[i];
         }
       }
       for (let a = 0; a < maxvalue+1; a++) {
-        this.firstthead[a] = false;
-        this.theadzaehler[a] = 0;
+        this.FirstThead[a] = false;
+        this.TheadZaehler[a] = 0;
       }
 
-      for (let i = 1; i < this.tables +1; i++) {
-        for (let a = 0; a < this.tablelength +1; a++) {
-          if (this.ChangedTheadValue[i].name[a] !== true) {
-          this.TheadValue[i].name[a] = "";
+      for (let i = 1; i < this.Tables +1; i++) {
+        for (let a = 0; a < this.TablesLength +1; a++) {
+          if (this.ChangedTheadValue[i].Index[a] !== true) {
+          this.TheadValue[i].Index[a] = "";
           }
-          if (this.firstthead[this.InputValueThead[i]] === false) {
+          if (this.FirstThead[this.InputValueThead[i]] === false) {
             
-            if (this.textareas[i].name[a] === true) {
-              this.TheadValue[i].name[a] = "0" + "F" + this.InputValueThead[i];
-              this.firstthead[this.InputValueThead[i]] = true;
+            if (this.TextAreas[i].Index[a] === true) {
+              this.TheadValue[i].Index[a] = "0" + "F" + this.InputValueThead[i];
+              this.FirstThead[this.InputValueThead[i]] = true;
             }
           }
 
-          if (this.ChangedTheadValue[i].name[a] !== true) {
-
-            if (this.textareas[i].name[a] === true) {
-              if (this.TheadValue[i].name[a] !== "0F" + this.InputValueThead[i]) {
-                this.theadzaehler[this.InputValueThead[i]]++;
-                this.TheadValue[i].name[a] = this.InputValueThead[i] + "F" + this.theadzaehler[this.InputValueThead[i]];
+          if (this.ChangedTheadValue[i].Index[a] !== true) {
+            if (this.TextAreas[i].Index[a] === true) {
+              if (this.TheadValue[i].Index[a] !== "0F" + this.InputValueThead[i]) {
+                this.TheadZaehler[this.InputValueThead[i]]++;
+                this.TheadValue[i].Index[a] = this.InputValueThead[i] + "F" + this.TheadZaehler[this.InputValueThead[i]];
               }
             }
           }
@@ -133,31 +131,32 @@ let vOne = Vue.createApp({
     loadtableline: function () {
       let tablewide = 2;
 
-      for (let a = 0; a < this.tablelength +1; a++) {
-        this.textareas[this.tables].name[a] = false;
+      for (let a = 0; a < this.TablesLength +1; a++) {
+        this.TextAreas[this.Tables].Index[a] = false;
       }
-      for (let i = 0; i < this.tablelength +1; i += tablewide) {
-        this.textareas[this.tables].name[i] = true;
+      for (let i = 0; i < this.TablesLength +1; i += tablewide) {
+        this.TextAreas[this.Tables].Index[i] = true;
       }
     },
 
 
     //check table click for hover effect
     changetableclick: function (table, length) {
-      if (this.tableclicked === false) {
+      if (this.TableClicked === false) {
         this.previewtable(table, length, true)
-        this.tableclicked = false;
+        this.TableClicked = false;
       } else {
-        this.tableclicked = false;
+        this.cleartbodyvalue(table, length);
+        this.TableClicked = false;
       }
     },
 
     //preview lines that are changed
     previewtable: function (table, length, hover) {
       if (hover === true) {
-        this.tableclicked = true;
+        this.TableClicked = true;
       }
-      if (this.tableclicked === true) {
+      if (this.TableClicked === true) {
         this.changetable(table, length)
       }
       this.loadtheadvalue();
@@ -168,16 +167,16 @@ let vOne = Vue.createApp({
     changetable: function (table, length) {
 
       let zaehler = 0;
-      let multiplikator = 100 / (this.tablelength);
+      let multiplikator = 100 / (this.TablesLength);
 
-      this.items[table].name.splice(0);
-      this.item.splice(0);
+      this.Items[table].Index.splice(0);
+      this.Item.splice(0);
 
-      this.textareas[table].name[length] = this.textareas[table].name[length] === false;
-      for (let i = 0; i < this.tablelength +1; i++) {
-        if (this.textareas[table].name[i] === true) {
-          this.items[table].name.push(i);
-          this.FontSize[table].name[i] = zaehler * multiplikator;
+      this.TextAreas[table].Index[length] = this.TextAreas[table].Index[length] === false;
+      for (let i = 0; i < this.TablesLength +1; i++) {
+        if (this.TextAreas[table].Index[i] === true) {
+          this.Items[table].Index.push(i);
+          this.FontSize[table].Index[i] = zaehler * multiplikator;
           zaehler = 1;
         } else {
           zaehler++;
@@ -186,57 +185,66 @@ let vOne = Vue.createApp({
     },
 
 
+    cleartbodyvalue: function(Table, Length){
+        this.TbodyValue[Table].Index[Length] = "";
+    },
+
+
+
     //create a new table
     addtable: function () {
       let array = [
         this.FontSize,
-        this.items,
-        this.textareas,
+        this.Items,
+        this.TextAreas,
         this.TheadValue,
-        this.ChangedTheadValue
+        this.ChangedTheadValue,
+        this.TbodyValue
       ];
 
 
-      this.tables++;
+      this.Tables++;
 
       array.forEach((arrays) => {
-        arrays.push({ name: [] });
+        arrays.push({ Index: [] });
       });
 
       this.loadtableline();
-      this.changetable(this.tables, 0, true);
-      if (this.tables > 1) {
-        this.InputValueThead[this.tables] = this.InputValueThead[this.tables - 1];
+      this.changetable(this.Tables, 0, true);
+      if (this.Tables > 1) {
+        this.InputValueThead[this.Tables] = this.InputValueThead[this.Tables - 1];
       }
       this.backgroundcolor();
       this.loadtheadvalue();
+     // this.cleartbodyvalue(this.Tables);
     },
 
     //delete the last table
     removetable: function () {
       let array = [
         this.FontSize,
-        this.items,
-        this.textareas,
+        this.Items,
+        this.TextAreas,
         this.TheadValue,
-        this.ChangedTheadValue
+        this.ChangedTheadValue,
+        this.TbodyValue
       ];
 
-      if (this.tables > 1) {
+      if (this.Tables > 1) {
 
         array.forEach((arrays) => {
-          arrays.splice(this.tables, 1);
+          arrays.splice(this.Tables, 1);
         });
 
-        this.tables--;
+        this.Tables--;
       }
     },
 
-    //print tables
+    //print Tables
     printInfo: function () {
-      this.visibility = true;
+      this.Visibility = true;
       setTimeout(() => window.print(), 1);
-      setTimeout(() => this.visibility = false, 1);
+      setTimeout(() => this.Visibility = false, 1);
     },
   },
 
