@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta Index="viewport" content="width=device-width, initial-scale=1.0">
 
   <!--      Css      -->
   <link href="assets/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,17 +22,19 @@
 </head>
 
 <body>
+
+  <!-- First Vue Instance-->
   <div id="vOne" class="container">
-    <template v-for="i in tables">
+    <template v-for="i in Tables">
       <div class="display-flex">
-        <div class="input-group my-input" :class="{ displaynone: visibility }">
+        <div class="input-group my-input" :class="{ displaynone: Visibility }">
           <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" @input="loadthead()">
         </div>
         <div class="my-table">
-          <table class="table table-borderless table-number mt-3" :class="{ displaynone: visibility }">
+          <table class="table table-borderless table-number mt-3" :class="{ displaynone: Visibility }">
             <thead>
               <tr class="number-line">
-                <template v-for="length in tablelength-1">
+                <template v-for="length in TablesLength-1">
                   <th class="line-point" @click="changetableclick(i, length)" @mouseover="previewtable(i, length, true)"
                     @mouseleave="previewtable(i, length, false)">*</th>
                 </template>
@@ -42,19 +44,21 @@
           <table class="table-bordered border-dark">
             <thead>
               <tr :style="{ background: BackGroundColor[i]}">
-                <template v-for="item in items[i].name">
-                  <th :style="{ width: FontSize[i].FontSize[item] + '%'}" class="my-table-tr">
-                    <input type="text" class="my-input-thead" v-model="TheadValue[i].name[item]" :style="{ background: BackGroundColor[i]}"
-                      @input="loadmyinputtheadvalue(i, item)" @dblclick="deletemyinputtheadvalue(i, item)">
+                <template v-for="Item in Items[i].Index">
+                  <th :style="{ width: FontSize[i].Index[Item] + '%'}" class="my-table-tr">
+                    <input type="text" class="my-input-thead" v-model="TheadValue[i].Index[Item]"
+                      :style="{ background: BackGroundColor[i]}" @input="loadmyinputtheadvalue(i, Item)"
+                      @dblclick="deletemyinputtheadvalue(i, Item)">
+
                   </th>
                 </template>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <template v-for="item in items[i].name">
-                  <td :style="{ width: FontSize[i].FontSize[item] + '%'}" class="my-table-tr">
-                    <textarea class="my-textarea-tbody"></textarea>
+                <template v-for="Item in Items[i].Index">
+                  <td :style="{ width: FontSize[i].Index[Item] + '%'}" class="my-table-tr">
+                    <textarea class="my-textarea-tbody" v-model="TbodyValue[i].Index[Item]"></textarea>
                   </td>
                 </template>
               </tr>
@@ -63,13 +67,41 @@
         </div>
       </div>
     </template>
-    <div :class="{ displaynone: visibility }">
+    <div :class="{ displaynone: Visibility }">
       <button type="button" class="btn btn-danger m-5" @click="removetable()">remove Tabelle</button>
       <button type="button" class="btn btn-success  m-5" @click="addtable()">add Tabelle</button>
       <button type="button" class="btn btn-dark  m-5" @click="printInfo()">Print</button>
       <button type="button" class="btn btn-dark  m-5" @click="exportToJsonFile()">export</button>
     </div>
   </div>
+
+  <!-- Second Vue Instance-->
+  <div id="vTwo" class="container">
+    <button type="button" class="btn btn-dark  m-5" @click="createtableview()">Create table view</button>
+    <table class="table table-bordered border-dark mt-5">
+      <thead>
+        <tr>
+          <th>Nummer</th>
+          <th>Stromkreis</th>
+          <th>Bezeichnung</th>
+          <th>Absicherung</th>
+          <th>Zuleitung</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template v-for="i in TableRow">
+          <tr>
+            <td>{{i}}</td>
+            <td>{{TheadValue[i]}}</td>
+            <td>{{TbodyValue[i]}}</td>
+            <td>B16A</td>
+            <td>3x15</td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+
 
   <input type="file" id="selectFiles" value="Import" /><br />
 <button id="import">Import</button>

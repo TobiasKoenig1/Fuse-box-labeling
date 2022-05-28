@@ -1,5 +1,5 @@
 # Fuse box labeling
-Tthis application can create and print labels for German fuse boxes to label the fuses
+This application can create and print labels for German fuse boxes to label the fuses
 
 
 ## Table of Contents
