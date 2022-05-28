@@ -15,6 +15,7 @@
   <!--Use <script src="src/Vue/vue.prod.js" defer></script> for the production environment -->
   <script src="src/Vue/vue.js" defer></script>
   <script src="src/javascript/tablecreate.js" defer></script>
+  <script src="src/javascript/importexport.js" defer></script>
 
 
   <title>Fuse box labeling</title>
@@ -42,7 +43,7 @@
             <thead>
               <tr :style="{ background: BackGroundColor[i]}">
                 <template v-for="item in items[i].name">
-                  <th :style="{ width: FontSize[i].name[item] + '%'}" class="my-table-tr">
+                  <th :style="{ width: FontSize[i].FontSize[item] + '%'}" class="my-table-tr">
                     <input type="text" class="my-input-thead" v-model="TheadValue[i].name[item]" :style="{ background: BackGroundColor[i]}"
                       @input="loadmyinputtheadvalue(i, item)" @dblclick="deletemyinputtheadvalue(i, item)">
                   </th>
@@ -52,7 +53,7 @@
             <tbody>
               <tr>
                 <template v-for="item in items[i].name">
-                  <td :style="{ width: FontSize[i].name[item] + '%'}" class="my-table-tr">
+                  <td :style="{ width: FontSize[i].FontSize[item] + '%'}" class="my-table-tr">
                     <textarea class="my-textarea-tbody"></textarea>
                   </td>
                 </template>
@@ -66,8 +67,18 @@
       <button type="button" class="btn btn-danger m-5" @click="removetable()">remove Tabelle</button>
       <button type="button" class="btn btn-success  m-5" @click="addtable()">add Tabelle</button>
       <button type="button" class="btn btn-dark  m-5" @click="printInfo()">Print</button>
+      <button type="button" class="btn btn-dark  m-5" @click="exportToJsonFile()">export</button>
     </div>
   </div>
+
+  <input type="file" id="selectFiles" value="Import" /><br />
+<button id="import">Import</button>
+<textarea id="result"></textarea>
+
+<div id="vThree">
+  <button type="button" class="btn btn-dark  m-5" @click="exportjsonfile()">export</button>
+  <button type="button" class="btn btn-dark  m-5" @click="importjsonfile()">load</button>
+</div>
 </body>
 
 </html>

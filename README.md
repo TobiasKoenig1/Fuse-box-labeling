@@ -13,7 +13,7 @@ Tthis application can create and print labels for German fuse boxes to label the
 * [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
-*[License](#license)
+* [License](#license)
 
 
 ## General Information
@@ -78,7 +78,7 @@ Bug fixes:
 
 
 ## Contact
-Created by [@TheKing6488](https://www.discordapp.com/users/270594690313748480) - feel free to contact me!
+Created by [@TheKing](https://www.discordapp.com/users/270594690313748480) - feel free to contact me!
 
 
 ## License

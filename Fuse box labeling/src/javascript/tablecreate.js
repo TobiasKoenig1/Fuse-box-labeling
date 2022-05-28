@@ -1,4 +1,5 @@
 let vOne = Vue.createApp({
+
   data() {
     return {
       //print
@@ -24,11 +25,11 @@ let vOne = Vue.createApp({
       tables: 0,
 
       FontSize: [
-        { name: [] },
+        { FontSize: [] },
       ],
 
       textareas: [
-        { name: [] },
+        { textareas: [] },
       ],
 
       items: [
@@ -49,23 +50,21 @@ let vOne = Vue.createApp({
 
   methods: {
 
-    //1: Input table
-
     //load thead background
     backgroundcolor: function(){
       let colors = [
-        "#800080",
-        "#FF00FF",
-        "#000080",
-        "#0000FF",
-        "#008080",
-        "#00FFFF",
-        "#008000",
-        "#00FF00",
-        "#808000",
-        "#FFFF00",
-        "#800000",
-        "#FF0000"
+        "#38e867",
+        "#ed3124",
+        "#ed8524",
+        "#edc124",
+        "#d9ed24",
+        "#8ced24",
+        "#2aed24",
+        "#24ed78",
+        "#24edc5",
+        "#24b1ed",
+        "#be24ed",
+        "#ed2485" 
       ];
       for (let i = 1; i < this.tables + 1; i++) {
         this.BackGroundColor[i] = colors[this.InputValueThead[i]-1];
@@ -110,7 +109,7 @@ let vOne = Vue.createApp({
           }
           if (this.firstthead[this.InputValueThead[i]] === false) {
             
-            if (this.textareas[i].name[a] === true) {
+            if (this.textareas[i].textareas[a] === true) {
               this.TheadValue[i].name[a] = "0" + "F" + this.InputValueThead[i];
               this.firstthead[this.InputValueThead[i]] = true;
             }
@@ -118,7 +117,7 @@ let vOne = Vue.createApp({
 
           if (this.ChangedTheadValue[i].name[a] !== true) {
 
-            if (this.textareas[i].name[a] === true) {
+            if (this.textareas[i].textareas[a] === true) {
               if (this.TheadValue[i].name[a] !== "0F" + this.InputValueThead[i]) {
                 this.theadzaehler[this.InputValueThead[i]]++;
                 this.TheadValue[i].name[a] = this.InputValueThead[i] + "F" + this.theadzaehler[this.InputValueThead[i]];
@@ -134,10 +133,10 @@ let vOne = Vue.createApp({
       let tablewide = 2;
 
       for (let a = 0; a < this.tablelength +1; a++) {
-        this.textareas[this.tables].name[a] = false;
+        this.textareas[this.tables].textareas[a] = false;
       }
       for (let i = 0; i < this.tablelength +1; i += tablewide) {
-        this.textareas[this.tables].name[i] = true;
+        this.textareas[this.tables].textareas[i] = true;
       }
     },
 
@@ -173,11 +172,11 @@ let vOne = Vue.createApp({
       this.items[table].name.splice(0);
       this.item.splice(0);
 
-      this.textareas[table].name[length] = this.textareas[table].name[length] === false;
+      this.textareas[table].textareas[length] = this.textareas[table].textareas[length] === false;
       for (let i = 0; i < this.tablelength +1; i++) {
-        if (this.textareas[table].name[i] === true) {
+        if (this.textareas[table].textareas[i] === true) {
           this.items[table].name.push(i);
-          this.FontSize[table].name[i] = zaehler * multiplikator;
+          this.FontSize[table].FontSize[i] = zaehler * multiplikator;
           zaehler = 1;
         } else {
           zaehler++;
@@ -188,20 +187,15 @@ let vOne = Vue.createApp({
 
     //create a new table
     addtable: function () {
-      let array = [
-        this.FontSize,
-        this.items,
-        this.textareas,
-        this.TheadValue,
-        this.ChangedTheadValue
-      ];
+
+        this.FontSize.push({ FontSize: [] });
+        this.items.push({ name: [] });
+        this.textareas.push({ textareas: [] });
+        this.TheadValue.push({ name: [] });
+        this.ChangedTheadValue.push({ name: [] });
 
 
       this.tables++;
-
-      array.forEach((arrays) => {
-        arrays.push({ name: [] });
-      });
 
       this.loadtableline();
       this.changetable(this.tables, 0, true);
