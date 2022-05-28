@@ -61,11 +61,11 @@ Project is: _in progress_
 ## Room for Improvement
 Room for improvement:
 - autocomplete funktion
-- export and import of tables
 - collapse and expand tables
 - Dark mode
 
 To do:
+- export and import of tables
 - Table with an overview of fuses with number, circuit, rating, fuse and supply line
 - customize thead colors better
 

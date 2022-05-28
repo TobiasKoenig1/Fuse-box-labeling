@@ -205,7 +205,6 @@ let vOne = Vue.createApp({
         this.ChangedTheadValue,
         this.TbodyValue
       ];
-=======
 
       this.Tables++;
 
