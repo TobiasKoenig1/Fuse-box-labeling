@@ -1,4 +1,5 @@
 let vOne = Vue.createApp({
+
   data() {
     return {
       //print
@@ -31,6 +32,7 @@ let vOne = Vue.createApp({
 
       TextAreas: [
         { Index: [] },
+       
       ],
 
       Items: [
@@ -50,21 +52,22 @@ let vOne = Vue.createApp({
 
 
   methods: {
+
     //load thead background
     backgroundcolor: function(){
       let colors = [
-        "#800080",
-        "#FF00FF",
-        "#000080",
-        "#0000FF",
-        "#008080",
-        "#00FFFF",
-        "#008000",
-        "#00FF00",
-        "#808000",
-        "#FFFF00",
-        "#800000",
-        "#FF0000"
+        "#38e867",
+        "#ed3124",
+        "#ed8524",
+        "#edc124",
+        "#d9ed24",
+        "#8ced24",
+        "#2aed24",
+        "#24ed78",
+        "#24edc5",
+        "#24b1ed",
+        "#be24ed",
+        "#ed2485" 
       ];
       for (let i = 1; i < this.Tables + 1; i++) {
         this.BackGroundColor[i] = colors[this.InputValueThead[i]-1];
@@ -120,6 +123,7 @@ let vOne = Vue.createApp({
               if (this.TheadValue[i].Index[a] !== "0F" + this.InputValueThead[i]) {
                 this.TheadZaehler[this.InputValueThead[i]]++;
                 this.TheadValue[i].Index[a] = this.InputValueThead[i] + "F" + this.TheadZaehler[this.InputValueThead[i]];
+
               }
             }
           }
@@ -201,13 +205,14 @@ let vOne = Vue.createApp({
         this.ChangedTheadValue,
         this.TbodyValue
       ];
-
+=======
 
       this.Tables++;
 
       array.forEach((arrays) => {
         arrays.push({ Index: [] });
       });
+
 
       this.loadtableline();
       this.changetable(this.Tables, 0, true);

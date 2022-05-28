@@ -13,7 +13,7 @@ This application can create and print labels for German fuse boxes to label the 
 * [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
-*[License](#license)
+* [License](#license)
 
 
 ## General Information
