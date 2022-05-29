@@ -2,6 +2,7 @@ let vOne = Vue.createApp({
 
   data() {
     return {
+
       //print
       Visibility: false,
 
@@ -20,10 +21,9 @@ let vOne = Vue.createApp({
       ],
 
       //table
-      TableClicked: true,
       TablesLength: 24,
       Tables: 0,
-      TbodyValue:[
+      TbodyValue: [
         { Index: [] },
       ],
       FontSize: [
@@ -32,7 +32,7 @@ let vOne = Vue.createApp({
 
       TextAreas: [
         { Index: [] },
-       
+
       ],
 
       Items: [
@@ -46,7 +46,7 @@ let vOne = Vue.createApp({
 
   //pre load Funktions
   created() {
-    this.InputValueThead[1] = 1;
+    this.InputValueThead[1] = "1";
     this.addtable();
   },
 
@@ -54,7 +54,7 @@ let vOne = Vue.createApp({
   methods: {
 
     //load thead background
-    backgroundcolor: function(){
+    backgroundcolor: function () {
       let colors = [
         "#38e867",
         "#ed3124",
@@ -67,15 +67,15 @@ let vOne = Vue.createApp({
         "#24edc5",
         "#24b1ed",
         "#be24ed",
-        "#ed2485" 
+        "#ed2485"
       ];
       for (let i = 1; i < this.Tables + 1; i++) {
-        this.BackGroundColor[i] = colors[this.InputValueThead[i]-1];
+        this.BackGroundColor[i] = colors[this.InputValueThead[i] - 1];
       }
     },
 
     //Set thead Value to default
-    deletemyinputtheadvalue: function(table, col){
+    deletemyinputtheadvalue: function (table, col) {
       this.ChangedTheadValue[table].Index[col] = false;
       this.loadtheadvalue();
     },
@@ -87,7 +87,7 @@ let vOne = Vue.createApp({
     },
 
     //load theader with value and color
-    loadthead: function(){
+    loadthead: function () {
       this.backgroundcolor();
       this.loadtheadvalue();
     },
@@ -95,23 +95,23 @@ let vOne = Vue.createApp({
     //Load theader with values ​​by default
     loadtheadvalue: function () {
       let maxvalue = 0;
-      for (let i = 1; i < this.Tables +1; i++) {
+      for (let i = 1; i < this.Tables + 1; i++) {
         if (maxvalue < this.InputValueThead[i] && this.InputValueThead[i] < 1000) {
           maxvalue = this.InputValueThead[i];
         }
       }
-      for (let a = 0; a < maxvalue+1; a++) {
+      for (let a = 0; a < maxvalue + 1; a++) {
         this.FirstThead[a] = false;
         this.TheadZaehler[a] = 0;
       }
 
-      for (let i = 1; i < this.Tables +1; i++) {
-        for (let a = 0; a < this.TablesLength +1; a++) {
+      for (let i = 1; i < this.Tables + 1; i++) {
+        for (let a = 0; a < this.TablesLength + 1; a++) {
           if (this.ChangedTheadValue[i].Index[a] !== true) {
-          this.TheadValue[i].Index[a] = "";
+            this.TheadValue[i].Index[a] = "";
           }
           if (this.FirstThead[this.InputValueThead[i]] === false) {
-            
+
             if (this.TextAreas[i].Index[a] === true) {
               this.TheadValue[i].Index[a] = "0" + "F" + this.InputValueThead[i];
               this.FirstThead[this.InputValueThead[i]] = true;
@@ -135,65 +135,43 @@ let vOne = Vue.createApp({
     loadtableline: function () {
       let tablewide = 2;
 
-      for (let a = 0; a < this.TablesLength +1; a++) {
+      for (let a = 0; a < this.TablesLength + 1; a++) {
         this.TextAreas[this.Tables].Index[a] = false;
       }
-      for (let i = 0; i < this.TablesLength +1; i += tablewide) {
+      for (let i = 0; i < this.TablesLength + 1; i += tablewide) {
         this.TextAreas[this.Tables].Index[i] = true;
       }
     },
 
 
-    //check table click for hover effect
-    changetableclick: function (table, length) {
-      if (this.TableClicked === false) {
-        this.previewtable(table, length, true)
-        this.TableClicked = false;
-      } else {
-        this.cleartbodyvalue(table, length);
-        this.TableClicked = false;
-      }
-    },
-
-    //preview lines that are changed
-    previewtable: function (table, length, hover) {
-      if (hover === true) {
-        this.TableClicked = true;
-      }
-      if (this.TableClicked === true) {
-        this.changetable(table, length)
-      }
+    //can create line in table and add a textarea
+    changetable: function (table, length) {
+      this.TextAreas[table].Index[length] = this.TextAreas[table].Index[length] === false;
+      this.TbodyValue[table].Index[length] = "";
+      this.loadtable();
       this.loadtheadvalue();
     },
 
 
-    //can create line in table and add a textarea
-    changetable: function (table, length) {
-
+    loadtable: function(){
       let zaehler = 0;
       let multiplikator = 100 / (this.TablesLength);
 
-      this.Items[table].Index.splice(0);
-      this.Item.splice(0);
-
-      this.TextAreas[table].Index[length] = this.TextAreas[table].Index[length] === false;
-      for (let i = 0; i < this.TablesLength +1; i++) {
-        if (this.TextAreas[table].Index[i] === true) {
-          this.Items[table].Index.push(i);
-          this.FontSize[table].Index[i] = zaehler * multiplikator;
-          zaehler = 1;
-        } else {
-          zaehler++;
+      for (let a = 1; a < this.Tables+1; a++) {
+        zaehler = 0;
+        this.Items[a].Index.splice(0);
+        this.Item.splice(0);
+        for (let i = 0; i < this.TablesLength + 1; i++) {
+          if (this.TextAreas[a].Index[i] === true) {
+            this.Items[a].Index.push(i);
+            this.FontSize[a].Index[i] = zaehler * multiplikator;
+            zaehler = 1;
+          } else {
+            zaehler++;
+          }
         }
       }
     },
-
-
-    cleartbodyvalue: function(Table, Length){
-        this.TbodyValue[Table].Index[Length] = "";
-    },
-
-
 
     //create a new table
     addtable: function () {
@@ -220,7 +198,6 @@ let vOne = Vue.createApp({
       }
       this.backgroundcolor();
       this.loadtheadvalue();
-     // this.cleartbodyvalue(this.Tables);
     },
 
     //delete the last table

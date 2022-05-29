@@ -15,6 +15,7 @@
   <!--Use <script src="src/Vue/vue.prod.js" defer></script> for the production environment -->
   <script src="src/Vue/vue.js" defer></script>
   <script src="src/javascript/tablecreate.js" defer></script>
+  <script src="src/javascript/tableview.js" defer></script>
   <script src="src/javascript/importexport.js" defer></script>
 
 
@@ -35,8 +36,7 @@
             <thead>
               <tr class="number-line">
                 <template v-for="length in TablesLength-1">
-                  <th class="line-point" @click="changetableclick(i, length)" @mouseover="previewtable(i, length, true)"
-                    @mouseleave="previewtable(i, length, false)">*</th>
+                  <th class="line-point" @click="changetable(i, length)">*</th>
                 </template>
               </tr>
             </thead>
@@ -71,7 +71,6 @@
       <button type="button" class="btn btn-danger m-5" @click="removetable()">remove Tabelle</button>
       <button type="button" class="btn btn-success  m-5" @click="addtable()">add Tabelle</button>
       <button type="button" class="btn btn-dark  m-5" @click="printInfo()">Print</button>
-      <button type="button" class="btn btn-dark  m-5" @click="exportToJsonFile()">export</button>
     </div>
   </div>
 
@@ -104,12 +103,13 @@
 
 
   <input type="file" id="selectFiles" value="Import" /><br />
-<button id="import">Import</button>
-<textarea id="result"></textarea>
 
+
+<!-- Third Vue Instance-->
 <div id="vThree">
   <button type="button" class="btn btn-dark  m-5" @click="exportjsonfile()">export</button>
   <button type="button" class="btn btn-dark  m-5" @click="importjsonfile()">load</button>
+  <button type="button" class="btn btn-dark  m-5" @click="log()">LOG</button>
 </div>
 </body>
 

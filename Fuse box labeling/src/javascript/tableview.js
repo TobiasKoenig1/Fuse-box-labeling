@@ -12,6 +12,7 @@ let vTwo = Vue.createApp({
     methods: {
 
         createtableview :function(){
+          console.log("test");
             this.TableRow = 0;
             for (let i = 0; i < vOne.Tables +1; i++) {
                 for(let a = 0; a < vOne.TablesLength +1; a++)

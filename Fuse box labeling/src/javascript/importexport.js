@@ -1,6 +1,3 @@
-
-
-
 let vThree = Vue.createApp({
 
     data() {
@@ -17,19 +14,31 @@ let vThree = Vue.createApp({
 
     methods: {
         exportjsonfile() {
-            let jsons = new Array();
-            jsons.push(vOne.tables)
-            jsons.push(vOne.textareas)
-            jsons.push(vOne.FontSize)
-      
-            let dataStr = JSON.stringify(jsons);
-      
+            let Jsons = new Array();
+
+            let Variables = [
+                vOne.Tables,
+                vOne.FontSize,
+                vOne.TextAreas,
+                vOne.TheadValue,
+                vOne.ChangedTheadValue,
+                vOne.TbodyValue,
+                vOne.TheadZaehler,
+                vOne.InputValueThead
+            ];
+
+            Variables.forEach((arrays) => {
+                Jsons.push(arrays)
+            });
+
+            let dataStr = JSON.stringify(Jsons);
+
             console.log(dataStr);
-      
-            let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-            
+
+            let dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
             let exportFileDefaultName = 'data.json';
-        
+
             let linkElement = document.createElement('a');
             linkElement.setAttribute('href', dataUri);
             linkElement.setAttribute('download', exportFileDefaultName);
@@ -47,23 +56,27 @@ let vThree = Vue.createApp({
             fr.onload = function (e) {
                 var result = JSON.parse(e.target.result);
                 var formatted = JSON.stringify(result, null, 2);
-                document.getElementById('result').value = formatted;
-                let jsonimport = JSON.parse(formatted);
-                vOne.tables = jsonimport[0];
-                vOne.textareas = jsonimport[1];
-                vOne.FontSize = jsonimport[2];
-
-                console.log(jsonimport);
+                let JsonImport = JSON.parse(formatted);
+                for(i = vOne.Tables; i< JsonImport[0]; i++){
+                    vOne.addtable();
+                    console.log(i);
+                }
+                    vOne.FontSize = JsonImport[1];
+                    vOne.TextAreas = JsonImport[2];
+                    vOne.TheadValue = JsonImport[3];
+                    vOne.ChangedTheadValue = JsonImport[4];
+                    vOne.TbodyValue = JsonImport[5];
+                    vOne.TheadZaehler = JsonImport[6];
+                    vOne.InputValueThead = JsonImport[7];
+                    
+            vOne.loadtable();
+            vOne.loadthead();
+                
             }
 
             fr.readAsText(files.item(0));
 
         },
-
-        log() {
-            console.log(vOne.FontSize)
-        },
-
 
     },
 
