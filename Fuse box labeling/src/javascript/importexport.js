@@ -2,7 +2,7 @@ let vThree = Vue.createApp({
 
     data() {
         return {
-
+            InputFileName: "",
         };
     },
 
@@ -13,7 +13,7 @@ let vThree = Vue.createApp({
 
 
     methods: {
-        exportjsonfile() {
+        async exportjsonfile() {
             let Jsons = new Array();
 
             let Variables = [
@@ -33,20 +33,24 @@ let vThree = Vue.createApp({
 
             let dataStr = JSON.stringify(Jsons);
 
-            console.log(dataStr);
+            var myBlob = new Blob([dataStr], {type: "text/plain"});
 
-            let dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+            const fileHandle = await window.showSaveFilePicker({
+                suggestedName: this.InputFileName,
+              types: [{
+                description: "JSON",
+                accept: {"text/plain": [".json"]}
+              }]
+            });
+            const fileStream = await fileHandle.createWritable();
 
-            let exportFileDefaultName = 'data.json';
-
-            let linkElement = document.createElement('a');
-            linkElement.setAttribute('href', dataUri);
-            linkElement.setAttribute('download', exportFileDefaultName);
-            linkElement.click();
+            await fileStream.write(myBlob);
+            await fileStream.close();
         },
 
+
         importjsonfile: function () {
-            var files = document.getElementById('selectFiles').files;
+            var files = document.getElementById('formFile').files;
             if (files.length <= 0) {
                 return false;
             }
@@ -59,7 +63,6 @@ let vThree = Vue.createApp({
                 let JsonImport = JSON.parse(formatted);
                 for(i = vOne.Tables; i< JsonImport[0]; i++){
                     vOne.addtable();
-                    console.log(i);
                 }
                     vOne.FontSize = JsonImport[1];
                     vOne.TextAreas = JsonImport[2];
@@ -75,6 +78,8 @@ let vThree = Vue.createApp({
             }
 
             fr.readAsText(files.item(0));
+
+            this.InputFileName = document.getElementById('formFile').files[0].name;
 
         },
 

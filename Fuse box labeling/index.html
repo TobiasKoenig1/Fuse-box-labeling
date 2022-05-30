@@ -101,15 +101,13 @@
     </table>
   </div>
 
-
-  <input type="file" id="selectFiles" value="Import" /><br />
-
-
 <!-- Third Vue Instance-->
-<div id="vThree">
+<div id="vThree" class="container">
+  <div class="mt-5">
+    <label for="formFile" class="form-label">Inport Data</label>
+    <input class="form-control" type="file" accept=".json" id="formFile" @change="importjsonfile()">
+  </div>
   <button type="button" class="btn btn-dark  m-5" @click="exportjsonfile()">export</button>
-  <button type="button" class="btn btn-dark  m-5" @click="importjsonfile()">load</button>
-  <button type="button" class="btn btn-dark  m-5" @click="log()">LOG</button>
 </div>
 </body>
 
