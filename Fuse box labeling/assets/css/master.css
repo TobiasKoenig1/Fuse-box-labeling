@@ -5,13 +5,24 @@
     -webkit-print-color-adjust:exact;
 }
 
+.my-menu-position{
+ position:fixed;
+ display: flex;
+}
+
+.my-menu{
+ display: flex;
+ justify-content: right;
+}
+
+
 .my-textarea-tbody{
     border: 0;
     width: 100%;
     resize: none;
     height: 95px;
     text-align: center;
-    overflow:hidden
+    overflow:hidden;
 }
 
 .my-textarea-tbody:focus {

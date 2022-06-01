@@ -14,6 +14,7 @@
   <script src="src/Bootstrap/js/bootstrap.min.js" defer></script>
   <!--Use <script src="src/Vue/vue.prod.js" defer></script> for the production environment -->
   <script src="src/Vue/vue.js" defer></script>
+  <script src="src/javascript/menu.js" defer></script>
   <script src="src/javascript/tablecreate.js" defer></script>
   <script src="src/javascript/tableview.js" defer></script>
   <script src="src/javascript/importexport.js" defer></script>
@@ -23,6 +24,55 @@
 </head>
 
 <body>
+
+  <!-- Menu Vue Instance-->
+  <div id="vMenu">
+    <div class="my-menu">
+        <button class="btn btn-info m-5 my-menu-position" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Befehlsübersicht</button>
+    </div>
+
+    <!-- Sidebar menu-->
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+      id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <h3 class="offcanvas-title" id="offcanvasScrollingLabel">Befehlsübersicht</h5>
+      </div>
+
+      <div class="offcanvas-body">
+
+        <div class="m-4 mt-0">
+          <h4>Tabelle</h4>
+          <div :class="{ displaynone: Visibility }">
+            <div class="d-grid gap-2 mt-3">
+              <button type="button" class="btn btn-success mt-1" @click="addtable()">Tabelle Hinzufügen</button>
+              <button type="button" class="btn btn-danger mt-1" @click="removetable()">Tabelle Löschen</button>
+              <button type="button" class="btn btn-dark mt-1" @click="printInfo()">Drucken</button>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+        <div class="m-4">
+          <h4>Tabellen Übersicht</h4>
+          <div class="d-grid gap-2 mt-3">
+            <button type="button" class="btn btn-dark mt-1" @click="createtableview()">Tabellen Übersicht</button>
+          </div>
+        </div>
+        <hr>
+        <div class="m-4">
+          <h4>Laden/Speichern</h4>
+          <div class="d-grid gap-2 mt-3">
+            <input class="form-control mt-1" type="file" accept=".json" id="formFile" @change="importjsonfile()">
+            <button type="button" class="btn btn-dark mt-1" @click="exportjsonfile()"
+              id="exportButton">Speichern</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <!-- First Vue Instance-->
   <div id="vOne" class="container">
@@ -67,16 +117,10 @@
         </div>
       </div>
     </template>
-    <div :class="{ displaynone: Visibility }">
-      <button type="button" class="btn btn-danger m-5" @click="removetable()">remove Tabelle</button>
-      <button type="button" class="btn btn-success  m-5" @click="addtable()">add Tabelle</button>
-      <button type="button" class="btn btn-dark  m-5" @click="printInfo()">Print</button>
-    </div>
   </div>
 
   <!-- Second Vue Instance-->
   <div id="vTwo" class="container">
-    <button type="button" class="btn btn-dark  m-5" @click="createtableview()">Create table view</button>
     <table class="table table-bordered border-dark mt-5">
       <thead>
         <tr>
@@ -100,15 +144,11 @@
       </tbody>
     </table>
   </div>
-
-<!-- Third Vue Instance-->
-<div id="vThree" class="container">
-  <div class="mt-5">
-    <label for="formFile" class="form-label">Inport Data</label>
-    <input class="form-control" type="file" accept=".json" id="formFile" @change="importjsonfile()">
   </div>
-  <button type="button" class="btn btn-dark  m-5" @click="exportjsonfile()">export</button>
+
+    <!-- Third Vue Instance-->
+<div id="vThree">
+
 </div>
 </body>
-
 </html>
