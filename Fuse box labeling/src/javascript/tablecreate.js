@@ -26,6 +26,10 @@ let vOne = Vue.createApp({
       TbodyValue: [
         { Index: [] },
       ],
+      Tbodylength:[
+        { Index: [] },
+      ],
+
       FontSize: [
         { Index: [] },
       ],
@@ -113,17 +117,18 @@ let vOne = Vue.createApp({
           if (this.FirstThead[this.InputValueThead[i]] === false) {
 
             if (this.TextAreas[i].Index[a] === true) {
+              if (this.ChangedTheadValue[i].Index[a] !== true) {
               this.TheadValue[i].Index[a] = "0" + "F" + this.InputValueThead[i];
+              }
               this.FirstThead[this.InputValueThead[i]] = true;
             }
           }
-
+        
           if (this.ChangedTheadValue[i].Index[a] !== true) {
             if (this.TextAreas[i].Index[a] === true) {
               if (this.TheadValue[i].Index[a] !== "0F" + this.InputValueThead[i]) {
                 this.TheadZaehler[this.InputValueThead[i]]++;
                 this.TheadValue[i].Index[a] = this.InputValueThead[i] + "F" + this.TheadZaehler[this.InputValueThead[i]];
-
               }
             }
           }
@@ -165,6 +170,7 @@ let vOne = Vue.createApp({
           if (this.TextAreas[a].Index[i] === true) {
             this.Items[a].Index.push(i);
             this.FontSize[a].Index[i] = zaehler * multiplikator;
+            this.Tbodylength[a].Index[i] = zaehler;
             zaehler = 1;
           } else {
             zaehler++;
@@ -181,7 +187,8 @@ let vOne = Vue.createApp({
         this.TextAreas,
         this.TheadValue,
         this.ChangedTheadValue,
-        this.TbodyValue
+        this.TbodyValue,
+        this.Tbodylength
       ];
 
       this.Tables++;
@@ -208,7 +215,8 @@ let vOne = Vue.createApp({
         this.TextAreas,
         this.TheadValue,
         this.ChangedTheadValue,
-        this.TbodyValue
+        this.TbodyValue,
+        this.Tbodylength
       ];
 
       if (this.Tables > 1) {

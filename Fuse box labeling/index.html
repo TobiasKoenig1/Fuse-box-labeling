@@ -27,49 +27,51 @@
 
   <!-- Menu Vue Instance-->
   <div id="vMenu">
-    <div class="my-menu">
+    <div :class="{displaynone: Visibility}">
+      <div class="my-menu">
         <button class="btn btn-info m-5 my-menu-position" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Befehlsübersicht</button>
-    </div>
-
-    <!-- Sidebar menu-->
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-      id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-      <div class="offcanvas-header">
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        <h3 class="offcanvas-title" id="offcanvasScrollingLabel">Befehlsübersicht</h5>
       </div>
 
-      <div class="offcanvas-body">
+      <!-- Sidebar menu-->
+      <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+        id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <h3 class="offcanvas-title" id="offcanvasScrollingLabel">Befehlsübersicht</h5>
+        </div>
 
-        <div class="m-4 mt-0">
-          <h4>Tabelle</h4>
-          <div :class="{ displaynone: Visibility }">
-            <div class="d-grid gap-2 mt-3">
-              <button type="button" class="btn btn-success mt-1" @click="addtable()">Tabelle Hinzufügen</button>
-              <button type="button" class="btn btn-danger mt-1" @click="removetable()">Tabelle Löschen</button>
-              <button type="button" class="btn btn-dark mt-1" @click="printInfo()">Drucken</button>
+        <div class="offcanvas-body">
+
+          <div class="m-4 mt-0">
+            <h4>Tabelle</h4>
+            <div>
+              <div class="d-grid gap-2 mt-3">
+                <button type="button" class="btn btn-success mt-1" @click="addtable()">Tabelle Hinzufügen</button>
+                <button type="button" class="btn btn-danger mt-1" @click="removetable()">Tabelle Löschen</button>
+                <button type="button" class="btn btn-dark mt-1" @click="printInfo()">Drucken</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <hr>
-        <div class="m-4">
-          <h4>Tabellen Übersicht</h4>
-          <div class="d-grid gap-2 mt-3">
-            <button type="button" class="btn btn-dark mt-1" @click="createtableview()">Tabellen Übersicht</button>
+          <hr>
+          <div class="m-4">
+            <h4>Tabellen Übersicht</h4>
+            <div class="d-grid gap-2 mt-3">
+              <button type="button" class="btn btn-dark mt-1" @click="createtableview()">Tabellen Übersicht</button>
+            </div>
           </div>
-        </div>
-        <hr>
-        <div class="m-4">
-          <h4>Laden/Speichern</h4>
-          <div class="d-grid gap-2 mt-3">
-            <input class="form-control mt-1" type="file" accept=".json" id="formFile" @change="importjsonfile()">
-            <button type="button" class="btn btn-dark mt-1" @click="exportjsonfile()"
-              id="exportButton">Speichern</button>
+          <hr>
+          <div class="m-4">
+            <h4>Laden/Speichern</h4>
+            <div class="d-grid gap-2 mt-3">
+              <input class="form-control mt-1" type="file" accept=".json" id="formFile" @change="importjsonfile()">
+              <button type="button" class="btn btn-dark mt-1" @click="exportjsonfile()"
+                id="exportButton">Speichern</button>
+            </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   </div>
@@ -78,16 +80,21 @@
   <div id="vOne" class="container">
     <template v-for="i in Tables">
       <div class="display-flex">
-        <div class="input-group my-input" :class="{ displaynone: Visibility }">
-          <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" @input="loadthead()">
+        <div :class="{displaynone: Visibility}">
+          <div class="input-group my-input" :class="{ displaynone: Visibility }">
+            <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" @input="loadthead()">
+          </div>
         </div>
+
         <div class="my-table">
           <table class="table table-borderless table-number mt-3" :class="{ displaynone: Visibility }">
             <thead>
               <tr class="number-line">
-                <template v-for="length in TablesLength-1">
-                  <th class="line-point" @click="changetable(i, length)">*</th>
+                <template v-for="length in TablesLength/2-1">
+                  <th class="line-point" @click="changetable(i, length*2-1)">*</th>
+                  <th class="line-point" @click="changetable(i, length*2)">{{length}}</th>
                 </template>
+                <th class="line-point" @click="changetable(i, TablesLength-1)">*</th>
               </tr>
             </thead>
           </table>
@@ -99,7 +106,6 @@
                     <input type="text" class="my-input-thead" v-model="TheadValue[i].Index[Item]"
                       :style="{ background: BackGroundColor[i]}" @input="loadmyinputtheadvalue(i, Item)"
                       @dblclick="deletemyinputtheadvalue(i, Item)">
-
                   </th>
                 </template>
               </tr>
@@ -110,6 +116,17 @@
                   <td :style="{ width: FontSize[i].Index[Item] + '%'}" class="my-table-tr">
                     <textarea class="my-textarea-tbody" v-model="TbodyValue[i].Index[Item]"></textarea>
                   </td>
+                </template>
+              </tr>
+            </tbody>
+
+          </table>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <template v-for="Item in Items[i].Index">
+                  <td :style="{ width: FontSize[i].Index[Item] + '%'}" class="my-table-tr my-tbody-length">
+                    {{Tbodylength[i].Index[Item]/2}}</td>
                 </template>
               </tr>
             </tbody>
@@ -146,9 +163,10 @@
   </div>
   </div>
 
-    <!-- Third Vue Instance-->
-<div id="vThree">
+  <!-- Third Vue Instance-->
+  <div id="vThree">
 
-</div>
+  </div>
 </body>
+
 </html>

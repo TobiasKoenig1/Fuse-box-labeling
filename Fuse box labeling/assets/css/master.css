@@ -48,14 +48,23 @@
 }
 
 .table-number{
-    margin-left: 2.3%;
-    max-width: 95%;
+    margin-left: 2.4%;
+    max-width: 95.6%;
 }
 
 .number-line{
     cursor: pointer;
     text-align: center;
     font-size: 13px;
+}
+
+.line-point{
+    max-width: 5px;
+}
+
+.line-point:hover{
+    background-color: rgb(220, 220, 220);
+    border-radius: 7px;
 }
 
 .my-table{
@@ -65,6 +74,10 @@
 
 .my-table-tr{
     padding: 3px;
+}
+
+.my-tbody-length{
+    text-align: center;
 }
 
 .my-input{
@@ -87,9 +100,4 @@
 
 .displaynone{
     display: none;
-}
-
-.line-point:hover{
-    background-color: lightblue;
-    border-radius: 7px;
 }
