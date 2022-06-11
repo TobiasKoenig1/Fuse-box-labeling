@@ -14,10 +14,10 @@
   <script src="src/Bootstrap/js/bootstrap.min.js" defer></script>
   <!--Use <script src="src/Vue/vue.prod.js" defer></script> for the production environment -->
   <script src="src/Vue/vue.js" defer></script>
-  <script src="src/javascript/menu.js" defer></script>
   <script src="src/javascript/tablecreate.js" defer></script>
   <script src="src/javascript/tableview.js" defer></script>
   <script src="src/javascript/importexport.js" defer></script>
+  <script src="src/javascript/menu.js" defer></script>
 
 
   <title>Fuse box labeling</title>
@@ -28,10 +28,22 @@
   <!-- Menu Vue Instance-->
   <div id="vMenu">
     <div :class="{displaynone: Visibility}">
-      <div class="my-menu">
-        <button class="btn btn-info m-5 my-menu-position" type="button" data-bs-toggle="offcanvas"
+      <div class="my-menu m-5">
+        <button class="btn btn-info my-menu-position" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Befehlsübersicht</button>
       </div>
+      <div class="my-side-group m-5">
+        <div class="btn-group " role="group" aria-label="Basic radio toggle button group">
+
+          <template v-for="i in Pages">
+            <input type="radio" class="btn-check" name="btnradio" :id="i" @click="switchpage(i)"
+              :checked="CheckedValue == i">
+            <label class="btn btn-outline-info" :for="i">{{i}}</label>
+          </template>
+
+        </div>
+      </div>
+
 
       <!-- Sidebar menu-->
       <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
@@ -78,94 +90,97 @@
 
   <!-- First Vue Instance-->
   <div id="vOne" class="container">
-    <template v-for="i in Tables">
-      <div class="display-flex">
-        <div :class="{displaynone: Visibility}">
-          <div class="input-group my-input" :class="{ displaynone: Visibility }">
-            <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" @input="loadthead()">
+    <div :class="{displaynone: Page}">
+      <template v-for="i in Tables">
+        <div class="display-flex">
+          <div :class="{displaynone: Visibility}">
+            <div class="input-group my-input" :class="{ displaynone: Visibility }">
+              <input type="text" class="form-control my-input-font" v-model="InputValueThead[i]" @input="loadthead()">
+            </div>
+          </div>
+          <div class="my-table">
+            <table class="table table-borderless table-number mt-3" :class="{ displaynone: Visibility }">
+              <thead>
+                <tr class="number-line">
+                  <template v-for="length in TablesLength/2-1">
+                    <th class="line-point" @click="changetable(i, length*2-1)">*</th>
+                    <th class="line-point" @click="changetable(i, length*2)">{{length}}</th>
+                  </template>
+                  <th class="line-point" @click="changetable(i, TablesLength-1)">*</th>
+                </tr>
+              </thead>
+            </table>
+            <table class="table-bordered border-dark">
+              <thead>
+                <tr :style="{ background: BackGroundColor[i]}">
+                  <template v-for="Item in Items[i].Index">
+                    <th :style="{ width: FontSize[i].Index[Item] + '%'}" class="my-table-tr">
+                      <input type="text" class="my-input-thead" v-model="TheadValue[i].Index[Item]"
+                        :style="{ background: BackGroundColor[i]}" @input="loadmyinputtheadvalue(i, Item)"
+                        @dblclick="deletemyinputtheadvalue(i, Item)">
+                    </th>
+                  </template>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <template v-for="Item in Items[i].Index">
+                    <td :style="{ width: FontSize[i].Index[Item] + '%'}" class="my-table-tr">
+                      <textarea class="my-textarea-tbody" v-model="TbodyValue[i].Index[Item]"></textarea>
+                    </td>
+                  </template>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <template v-for="Item in Items[i].Index">
+                    <td :style="{ width: FontSize[i].Index[Item] + '%'}" class="my-table-tr my-tbody-length">
+                      {{Tbodylength[i].Index[Item]/2}}</td>
+                  </template>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-
-        <div class="my-table">
-          <table class="table table-borderless table-number mt-3" :class="{ displaynone: Visibility }">
-            <thead>
-              <tr class="number-line">
-                <template v-for="length in TablesLength/2-1">
-                  <th class="line-point" @click="changetable(i, length*2-1)">*</th>
-                  <th class="line-point" @click="changetable(i, length*2)">{{length}}</th>
-                </template>
-                <th class="line-point" @click="changetable(i, TablesLength-1)">*</th>
-              </tr>
-            </thead>
-          </table>
-          <table class="table-bordered border-dark">
-            <thead>
-              <tr :style="{ background: BackGroundColor[i]}">
-                <template v-for="Item in Items[i].Index">
-                  <th :style="{ width: FontSize[i].Index[Item] + '%'}" class="my-table-tr">
-                    <input type="text" class="my-input-thead" v-model="TheadValue[i].Index[Item]"
-                      :style="{ background: BackGroundColor[i]}" @input="loadmyinputtheadvalue(i, Item)"
-                      @dblclick="deletemyinputtheadvalue(i, Item)">
-                  </th>
-                </template>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <template v-for="Item in Items[i].Index">
-                  <td :style="{ width: FontSize[i].Index[Item] + '%'}" class="my-table-tr">
-                    <textarea class="my-textarea-tbody" v-model="TbodyValue[i].Index[Item]"></textarea>
-                  </td>
-                </template>
-              </tr>
-            </tbody>
-
-          </table>
-          <table class="table table-borderless">
-            <tbody>
-              <tr>
-                <template v-for="Item in Items[i].Index">
-                  <td :style="{ width: FontSize[i].Index[Item] + '%'}" class="my-table-tr my-tbody-length">
-                    {{Tbodylength[i].Index[Item]/2}}</td>
-                </template>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </template>
+      </template>
+    </div>
   </div>
 
   <!-- Second Vue Instance-->
   <div id="vTwo" class="container">
-    <table class="table table-bordered border-dark mt-5">
-      <thead>
-        <tr>
-          <th>Nummer</th>
-          <th>Stromkreis</th>
-          <th>Bezeichnung</th>
-          <th>Absicherung</th>
-          <th>Zuleitung</th>
-        </tr>
-      </thead>
-      <tbody>
-        <template v-for="i in TableRow">
+    <div :class="{displaynone: Page}">
+      <table class="table table-bordered border-dark mt-5">
+        <thead>
           <tr>
-            <td>{{i}}</td>
-            <td>{{TheadValue[i]}}</td>
-            <td>{{TbodyValue[i]}}</td>
-            <td>B16A</td>
-            <td>3x15</td>
+            <th>Nummer</th>
+            <th>Stromkreis</th>
+            <th>Bezeichnung</th>
+            <th>Absicherung</th>
+            <th>Zuleitung</th>
           </tr>
-        </template>
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          <template v-for="i in TableRow">
+            <tr>
+              <td><input type="text" class="my-input-tbody" v-model="RowNumber[i]"></td>
+              <td><input type="text" class="my-input-tbody" v-model="Thead[0].Value[i]" @input="changedtableview(0, i)" @dblclick="deletetableview(0, i)"></td>
+              <td><input type="text" class="my-input-tbody" v-model="Tbody[0].Value[i]" @input="changedtableview(1, i)" @dblclick="deletetableview(1, i)"></td>
+              <td><input type="text" class="my-input-tbody" v-model="Fuse[0].Value[i]" @input="changedtableview(2, i)" @dblclick="deletetableview(2, i)"></td>
+              <td><input type="text" class="my-input-tbody" v-model="SupplyLine[0].Value[i]" @input="changedtableview(3, i)" @dblclick="deletetableview(3, i)"></td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!-- Third Vue Instance-->
   <div id="vThree">
+    <div :class="{displaynone: Page}">
 
+    </div>
   </div>
 </body>
 

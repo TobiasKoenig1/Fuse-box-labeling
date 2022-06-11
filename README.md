@@ -63,6 +63,7 @@ Room for improvement:
 - autocomplete funktion
 - collapse and expand tables
 - Dark mode
+- better structure of the css file
 
 To do:
 - export and import of tables
@@ -70,7 +71,8 @@ To do:
 - customize thead colors better
 
 Bug fixes:
-
+- table length is not displayed correctly with only one column
+- when changing table sizes change name with the correct protection
 
 
 ## Acknowledgements
@@ -83,4 +85,3 @@ Created by [@TheKing](https://www.discordapp.com/users/270594690313748480) - fee
 
 ## License
 This project is open source and available under the [MIT License](./LICENSE)
-

@@ -2,13 +2,10 @@ let vThree = Vue.createApp({
 
     data() {
         return {
+            Page: false,
+
             InputFileName: "",
         };
-    },
-
-    //pre load Funktions
-    created() {
-
     },
 
 
@@ -86,5 +83,3 @@ let vThree = Vue.createApp({
     },
 
 }).mount('#vThree')
-
-

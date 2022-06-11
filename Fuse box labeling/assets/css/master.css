@@ -2,17 +2,28 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-print-color-adjust:exact;
+    -webkit-print-color-adjust: exact;
 }
+
+.my-menu{
+    position:fixed;
+    display: flex;
+    right: 180px;
+   }
+
 
 .my-menu-position{
  position:fixed;
  display: flex;
 }
 
-.my-menu{
- display: flex;
- justify-content: right;
+
+.my-side-group{
+    z-index: 1;
+    position: fixed;
+    display: flex;
+    justify-content: left;
+    bottom: 10px;
 }
 
 
@@ -100,4 +111,14 @@
 
 .displaynone{
     display: none;
+}
+
+.my-input-tbody{
+    width: 100%;
+    border: 0;
+}
+
+.my-input-tbody:focus {
+    outline: none;
+    box-shadow: none;
 }

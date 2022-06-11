@@ -3,6 +3,8 @@ let vOne = Vue.createApp({
   data() {
     return {
 
+      Page: true,
+      
       //print
       Visibility: false,
 
@@ -138,21 +140,21 @@ let vOne = Vue.createApp({
 
     //load how many lines are created at the beginning
     loadtableline: function () {
-      let tablewide = 2;
+      let TableWide = 2;
 
       for (let a = 0; a < this.TablesLength + 1; a++) {
         this.TextAreas[this.Tables].Index[a] = false;
       }
-      for (let i = 0; i < this.TablesLength + 1; i += tablewide) {
+      for (let i = 0; i < this.TablesLength + 1; i += TableWide) {
         this.TextAreas[this.Tables].Index[i] = true;
       }
     },
 
 
     //can create line in table and add a textarea
-    changetable: function (table, length) {
-      this.TextAreas[table].Index[length] = this.TextAreas[table].Index[length] === false;
-      this.TbodyValue[table].Index[length] = "";
+    changetable: function (Table, Length) {
+      this.TextAreas[Table].Index[Length] = this.TextAreas[Table].Index[Length] === false;
+      this.TbodyValue[Table].Index[Length] = "";
       this.loadtable();
       this.loadtheadvalue();
     },
