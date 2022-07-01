@@ -2,7 +2,6 @@ let vOne = Vue.createApp({
 
   data() {
     return {
-
       Page: true,
       
       //print

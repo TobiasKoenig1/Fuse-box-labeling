@@ -62,12 +62,21 @@ let vThree = Vue.createApp({
                     vOne.addtable();
                 }
                     vOne.FontSize = JsonImport[1];
+
                     vOne.TextAreas = JsonImport[2];
+
                     vOne.TheadValue = JsonImport[3];
+
                     vOne.ChangedTheadValue = JsonImport[4];
+
                     vOne.TbodyValue = JsonImport[5];
+
                     vOne.TheadZaehler = JsonImport[6];
+
                     vOne.InputValueThead = JsonImport[7];
+
+                    vOne.TestValue = JsonImport[8];
+                    
                     
             vOne.loadtable();
             vOne.loadthead();
