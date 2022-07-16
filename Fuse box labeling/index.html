@@ -77,9 +77,12 @@
           <div class="m-4">
             <h4>Laden/Speichern</h4>
             <div class="d-grid gap-2 mt-3">
-              <input class="form-control mt-1" type="file" accept=".json" id="formFile" @change="importjsonfile()">
-              <button type="button" class="btn btn-dark mt-1" @click="exportjsonfile()"
-                id="exportButton">Speichern</button>
+              <div class="input-group mt-1">
+                <button type="button" class="btn btn-dark" @click="importjsonfile()">Lade Datei</button>
+                <input type="text" class="form-control my-pointer" placeholder="Dateiname" id="InputFileName" @click="importjsonfile()" readonly>
+              </div>
+              <button type="button" class="btn btn-dark mt-1" @click="exportjsonfilestream()">Speichern</button>
+              <button type="button" class="btn btn-dark mt-1" @click="exportjsonfile()">Speichern unter</button>
             </div>
           </div>
 
@@ -178,9 +181,6 @@
 
   <!-- Third Vue Instance-->
   <div id="vThree">
-    <div :class="{displaynone: Page}">
-
-    </div>
   </div>
 </body>
 

@@ -1,3 +1,30 @@
+let fileHandle;
+
+function exportData() {
+
+    let Jsons = new Array();
+
+    let Variables = [
+        vOne.Tables,
+        vOne.FontSize,
+        vOne.TextAreas,
+        vOne.TheadValue,
+        vOne.ChangedTheadValue,
+        vOne.TbodyValue,
+        vOne.TheadZaehler,
+        vOne.InputValueThead
+    ];
+
+    Variables.forEach((arrays) => {
+        Jsons.push(arrays)
+    });
+    let dataStr = JSON.stringify(Jsons);
+    var myBlob = new Blob([dataStr], { type: "text/plain" });
+    return myBlob;
+}
+
+
+
 let vThree = Vue.createApp({
 
     data() {
@@ -5,90 +32,89 @@ let vThree = Vue.createApp({
             Page: false,
 
             InputFileName: "",
+            fileHandle: "",
         };
     },
 
 
     methods: {
+
+        async exportjsonfilestream() {
+
+            let stream = await fileHandle.createWritable();
+            await stream.write(exportData());
+            await stream.close();
+        },
+
+
         async exportjsonfile() {
-            let Jsons = new Array();
-
-            let Variables = [
-                vOne.Tables,
-                vOne.FontSize,
-                vOne.TextAreas,
-                vOne.TheadValue,
-                vOne.ChangedTheadValue,
-                vOne.TbodyValue,
-                vOne.TheadZaehler,
-                vOne.InputValueThead
-            ];
-
-            Variables.forEach((arrays) => {
-                Jsons.push(arrays)
-            });
-
-            let dataStr = JSON.stringify(Jsons);
-
-            var myBlob = new Blob([dataStr], {type: "text/plain"});
-
-            const fileHandle = await window.showSaveFilePicker({
+            const fileHandle1 = await window.showSaveFilePicker({
                 suggestedName: this.InputFileName,
-              types: [{
-                description: "JSON",
-                accept: {"text/plain": [".json"]}
-              }]
+                types: [{
+                    description: "JSON",
+                    accept: { "text/plain": [".json"] }
+                }],
+                excludeAcceptAllOption: true,
             });
-            const fileStream = await fileHandle.createWritable();
-
-            await fileStream.write(myBlob);
+            const fileStream = await fileHandle1.createWritable();
+            fileHandle = fileHandle1;
+            document.getElementById("InputFileName").value = fileHandle.name;
+            await fileStream.write(exportData());
             await fileStream.close();
         },
 
 
-        importjsonfile: function () {
-            var files = document.getElementById('formFile').files;
-            if (files.length <= 0) {
-                return false;
-            }
+        async importjsonfile() {
+            const pickerOpts = {
+                types: [{
+                    description: "JSON",
+                    accept: { "text/plain": [".json"] }
+                }],
+                excludeAcceptAllOption: true,
+                multiple: false
+            };
 
+            [fileHandle] = await window.showOpenFilePicker(pickerOpts);
+            let fileData = await fileHandle.getFile();
+            console.log(fileData.name);
+            document.getElementById("InputFileName").value = fileHandle.name;
             var fr = new FileReader();
 
             fr.onload = function (e) {
                 var result = JSON.parse(e.target.result);
-                var formatted = JSON.stringify(result, null, 2);
+                var formatted = JSON.stringify(result);
                 let JsonImport = JSON.parse(formatted);
-                for(i = vOne.Tables; i< JsonImport[0]; i++){
-                    vOne.addtable();
-                }
-                    vOne.FontSize = JsonImport[1];
+                //for (i = vOne.Tables; i < JsonImport[0]; i++) {
+                //    vOne.addtable();
+                //}
 
-                    vOne.TextAreas = JsonImport[2];
+                //let testarray = JsonImport[1].index;
+                //vOne.FontSize.push(testarray);
+                console.log(vOne.FontSize);
+                let test = vOne.FontSize;
+                console.log(test);
+                vOne.FontSize = vOne.FontSize.concat(JsonImport[1])
+                console.log(vOne.FontSize);
+                //vOne.TextAreas = JsonImport[2];
 
-                    vOne.TheadValue = JsonImport[3];
+                //vOne.TheadValue = JsonImport[3];
 
-                    vOne.ChangedTheadValue = JsonImport[4];
+                //vOne.ChangedTheadValue = JsonImport[4];
 
-                    vOne.TbodyValue = JsonImport[5];
+                //vOne.TbodyValue = JsonImport[5];
 
-                    vOne.TheadZaehler = JsonImport[6];
+                //vOne.TheadZaehler = JsonImport[6];
 
-                    vOne.InputValueThead = JsonImport[7];
+                //vOne.InputValueThead = JsonImport[7];
 
-                    vOne.TestValue = JsonImport[8];
-                    
-                    
-            vOne.loadtable();
-            vOne.loadthead();
-                
+                //vOne.TestValue = JsonImport[8];
+
+                vOne.loadtable();
+                vOne.loadthead();
+
             }
-
-            fr.readAsText(files.item(0));
-
-            this.InputFileName = document.getElementById('formFile').files[0].name;
-
+            fr.readAsText(fileData);
         },
-
     },
 
 }).mount('#vThree')

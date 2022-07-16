@@ -206,6 +206,7 @@ let vOne = Vue.createApp({
       }
       this.backgroundcolor();
       this.loadtheadvalue();
+      console.log(this.FontSize);
     },
 
     //delete the last table

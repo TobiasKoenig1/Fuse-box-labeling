@@ -58,7 +58,6 @@ let vMenu = Vue.createApp({
       vThree.Visibility = true;
 
       setTimeout(() => window.print(), 1);
-
       setTimeout(() => this.Visibility = false, 1);
       setTimeout(() => vOne.Visibility = false, 1);
       setTimeout(() => vTwo.Visibility = false, 1);
@@ -67,6 +66,10 @@ let vMenu = Vue.createApp({
 
     createtableview: function () {
       vTwo.createtableview();
+    },
+
+    exportjsonfilestream: function () {
+      vThree.exportjsonfilestream();
     },
 
     exportjsonfile: function () {
