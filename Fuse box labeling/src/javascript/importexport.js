@@ -1,25 +1,20 @@
 let fileHandle;
-
+let Variables = [
+    vOne.Tables,
+    vOne.FontSize,
+    vOne.TextAreas,
+    vOne.TheadValue,
+    vOne.ChangedTheadValue,
+    vOne.TbodyValue,
+    vOne.TheadZaehler,
+    vOne.InputValueThead
+];
 function exportData() {
 
-    let Jsons = new Array();
 
-    let Variables = [
-        vOne.Tables,
-        vOne.FontSize,
-        vOne.TextAreas,
-        vOne.TheadValue,
-        vOne.ChangedTheadValue,
-        vOne.TbodyValue,
-        vOne.TheadZaehler,
-        vOne.InputValueThead
-    ];
-
-    Variables.forEach((arrays) => {
-        Jsons.push(arrays)
-    });
-    let dataStr = JSON.stringify(Jsons);
-    var myBlob = new Blob([dataStr], { type: "text/plain" });
+    Variables[0] = vOne.Tables;
+    let dataStr = JSON.stringify(Variables);
+    var myBlob = new Blob([dataStr], { "text/plain": [".json"] });
     return myBlob;
 }
 
@@ -30,9 +25,7 @@ let vThree = Vue.createApp({
     data() {
         return {
             Page: false,
-
             InputFileName: "",
-            fileHandle: "",
         };
     },
 
@@ -76,7 +69,6 @@ let vThree = Vue.createApp({
 
             [fileHandle] = await window.showOpenFilePicker(pickerOpts);
             let fileData = await fileHandle.getFile();
-            console.log(fileData.name);
             document.getElementById("InputFileName").value = fileHandle.name;
             var fr = new FileReader();
 
@@ -84,30 +76,48 @@ let vThree = Vue.createApp({
                 var result = JSON.parse(e.target.result);
                 var formatted = JSON.stringify(result);
                 let JsonImport = JSON.parse(formatted);
-                //for (i = vOne.Tables; i < JsonImport[0]; i++) {
-                //    vOne.addtable();
-                //}
 
-                //let testarray = JsonImport[1].index;
-                //vOne.FontSize.push(testarray);
-                console.log(vOne.FontSize);
-                let test = vOne.FontSize;
-                console.log(test);
-                vOne.FontSize = vOne.FontSize.concat(JsonImport[1])
-                console.log(vOne.FontSize);
-                //vOne.TextAreas = JsonImport[2];
+                console.log(JsonImport[0]);
+                vOne.Tables = JsonImport[0] + vOne.Tables;
 
-                //vOne.TheadValue = JsonImport[3];
+                for (let i = 1; i < JsonImport.length; i++) {
+                    JsonImport[i].shift();
+                }
 
-                //vOne.ChangedTheadValue = JsonImport[4];
+                JsonImport[1].forEach((arrays) => {
+                    vOne.FontSize.push(arrays);
+                    vOne.Items.push({ Index: [] });
+                    vOne.Tbodylength.push({ Index: [] });
+                });
 
-                //vOne.TbodyValue = JsonImport[5];
+                JsonImport[2].forEach((arrays) => {
+                    vOne.TextAreas.push(arrays);
+                });
 
-                //vOne.TheadZaehler = JsonImport[6];
 
-                //vOne.InputValueThead = JsonImport[7];
+                JsonImport[3].forEach((arrays) => {
+                    vOne.TheadValue.push(arrays);
+                });
 
-                //vOne.TestValue = JsonImport[8];
+
+                JsonImport[4].forEach((arrays) => {
+                    vOne.ChangedTheadValue.push(arrays);
+                });
+
+
+
+                JsonImport[5].forEach((arrays) => {
+                    vOne.TbodyValue.push(arrays);
+                });
+
+                JsonImport[6].forEach((arrays) => {
+                    vOne.TheadZaehler.push(arrays);
+                });
+
+
+                JsonImport[7].forEach((arrays) => {
+                    vOne.InputValueThead.push(arrays);
+                });
 
                 vOne.loadtable();
                 vOne.loadthead();
