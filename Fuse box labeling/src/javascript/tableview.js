@@ -20,6 +20,7 @@ let vTwo = Vue.createApp({
       SupplyLine: [
         { Value: [] },
         { Changed: [] },
+        { description: [] },
       ],
     }
   },
@@ -81,8 +82,10 @@ let vTwo = Vue.createApp({
               this.Thead[0].Value[this.TableRow] = vOne.TheadValue[i].Index[a];
             }
 
-            if(this.Tbody[1].Changed[this.TableRow]  !== true)
-            this.Tbody[0].Value[this.TableRow] = vOne.TbodyValue[i].Index[a];
+            if(this.Tbody[1].Changed[this.TableRow]  !== true){
+              this.Tbody[0].Value[this.TableRow] = vOne.TbodyValue[i].Index[a];
+            }
+
 
             if(this.Fuse[1].Changed[this.TableRow]  !== true){
               this.Fuse[0].Value[this.TableRow] = "B16A";
@@ -90,6 +93,10 @@ let vTwo = Vue.createApp({
 
             if(this.SupplyLine[1].Changed[this.TableRow]  !== true){
               this.SupplyLine[0].Value[this.TableRow] = "3x15";
+            }
+
+            if(this.SupplyLine[2].description[this.TableRow]  == this.){
+              
             }
           }
         }
@@ -105,6 +112,7 @@ let vTwo = Vue.createApp({
       ];
 
       array[Row][1].Changed[Index] = true;
+      this.SupplyLine[2].description[Index] = this.Tbody[0].Value[index];
       
     },
 

@@ -208,7 +208,7 @@ let vOne = Vue.createApp({
       this.loadtheadvalue();
     },
     
-
+    /*
     //delete the last table
     removetable: function () {
       let array = [
@@ -229,6 +229,29 @@ let vOne = Vue.createApp({
 
         this.Tables--;
       }
+    },
+    */
+
+    // delete a table
+    removetable: function (index) {
+      let array = [
+        this.FontSize,
+        this.Items,
+        this.TextAreas,
+        this.TheadValue,
+        this.ChangedTheadValue,
+        this.TbodyValue,
+        this.Tbodylength
+      ];
+
+      if (this.Tables > 1) {
+        array.forEach((arrays) => {
+          arrays.splice(index, 1);
+        });
+
+        this.Tables--;
+      }
+      
     },
 
     //print Tables

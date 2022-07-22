@@ -94,17 +94,13 @@ let vThree = Vue.createApp({
                     vOne.TextAreas.push(arrays);
                 });
 
-
                 JsonImport[3].forEach((arrays) => {
                     vOne.TheadValue.push(arrays);
                 });
 
-
                 JsonImport[4].forEach((arrays) => {
                     vOne.ChangedTheadValue.push(arrays);
                 });
-
-
 
                 JsonImport[5].forEach((arrays) => {
                     vOne.TbodyValue.push(arrays);
@@ -113,7 +109,6 @@ let vThree = Vue.createApp({
                 JsonImport[6].forEach((arrays) => {
                     vOne.TheadZaehler.push(arrays);
                 });
-
 
                 JsonImport[7].forEach((arrays) => {
                     vOne.InputValueThead.push(arrays);
